@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Prep — Viet Nguyen</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Top Bar ─────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">⚡ Interview Prep</span>
+      <span class="topbar-name">Viet Nguyen</span>
+    </div>
+    <div class="topbar-right">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search questions..." />
+      <span class="project-count" id="projectCount"></span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── Sidebar ───────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section-label">Projects</div>
+      <nav id="projectNav"></nav>
+    </aside>
+
+    <!-- ── Main Panel ────────────────────────────────────────── -->
+    <main class="main" id="mainPanel">
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">🎯</div>
+        <h2>Select a project</h2>
+        <p>Choose a project from the sidebar to review its Q&amp;A.</p>
+      </div>
+
+      <!-- Project detail -->
+      <div class="project-detail hidden" id="projectDetail">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="detail-type" id="detailType"></span>
+            <span class="detail-year" id="detailYear"></span>
+          </div>
+          <h1 class="detail-title" id="detailTitle"></h1>
+          <p class="detail-subtitle" id="detailSubtitle"></p>
+          <p class="detail-institution" id="detailInstitution"></p>
+          <div class="detail-tags" id="detailTags"></div>
+        </div>
+
+        <div class="detail-section">
+          <h2 class="section-heading">Project Summary</h2>
+          <ul class="summary-list" id="detailSummary"></ul>
+        </div>
+
+        <div class="detail-section">
+          <div class="qa-header">
+            <h2 class="section-heading">Interview Q&amp;A</h2>
+            <span class="qa-count" id="qaCount"></span>
+          </div>
+          <div class="qa-list" id="qaList"></div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ── Search Results Overlay ────────────────────────────── -->
+  <div class="search-overlay hidden" id="searchOverlay">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
