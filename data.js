@@ -173,5 +173,74 @@ const PROJECTS = [
     ]
   }
 
+  ,
+  {
+    id: "chicago-taxi-eda",
+    title: "Chicago Taxi Market Analysis",
+    subtitle: "EDA & Hypothesis Testing · SQL + Python",
+    institution: "TripleTen · Sprint 7 — Exploratory Data Analysis",
+    year: "2025",
+    type: "Data Analysis",
+    description: [
+      "Analyzed Chicago's taxi market using SQL-sourced data, identifying market concentration patterns across 64 taxi companies and dropoff demand across 94 neighborhoods. Flash Cab led with 19,558 rides in a single weekend — nearly 2× the second-place company.",
+      "Conducted a formal independent two-sample t-test to determine whether bad weather statistically significantly increases Loop-to-O'Hare ride duration. Result: t = 6.84, p ≈ 0 — bad weather adds ~6.9 minutes (+20.6%) to the average airport trip."
+    ],
+    tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "SciPy", "SQL", "Hypothesis Testing", "EDA", "t-test"],
+    qa: [
+      {
+        q: "What were the two main goals of this project?",
+        a: "Two distinct goals: (1) EDA — understand Chicago's taxi market structure. Which companies dominate? Which neighborhoods concentrate demand? This involved sorting and visualizing two SQL-sourced datasets: ride counts per company (64 companies) and average dropoffs per neighborhood (94 neighborhoods). (2) Hypothesis testing — rigorously answer whether bad weather makes Loop-to-O'Hare Saturday rides statistically significantly longer. The EDA side is descriptive; the hypothesis test is inferential. Together they show what the market looks like and what one specific factor does to it."
+      },
+      {
+        q: "What was the biggest EDA finding about the taxi market?",
+        a: "Flash Cab's dominance. Out of 64 companies, Flash Cab logged 19,558 rides on November 15–16, 2017 — nearly 71% more than the second-place company (Taxi Affiliation Services at 11,422). The field from #2 to #6 is fairly clustered (9,000–11,500 rides each), but none of them are close to Flash Cab. For market analysis, this kind of concentration matters: it suggests Flash Cab has structural advantages — fleet size, dispatch efficiency, or driver network — that competitors haven't replicated. The Loop and River North were the top two dropoff neighborhoods, reflecting Chicago's business district geography."
+      },
+      {
+        q: "How did you structure the hypothesis test — what were H₀ and H₁?",
+        a: "H₀ (null hypothesis): The average duration of Loop-to-O'Hare Saturday rides is the same regardless of weather conditions — bad weather has no effect. H₁ (alternative hypothesis): The average duration of those rides is longer in bad weather. Significance level α = 0.05, meaning I accept a 5% chance of falsely rejecting H₀ (Type I error rate). The alternative is one-directional — I'm specifically testing whether bad weather makes rides longer, not just whether it makes them different. Setting this up before analyzing the data is important: it prevents cherry-picking the hypothesis after seeing the result."
+      },
+      {
+        q: "What is an independent two-sample t-test and why was it the right test here?",
+        a: "An independent two-sample t-test compares the means of two separate, unrelated groups to determine whether the difference between them is statistically significant. 'Independent' means the two groups are distinct — no individual appears in both. Here: good-weather rides and bad-weather rides are different rides taken at different times. There's no pairing. A paired t-test would be wrong because paired tests require matched observations (same subject measured twice). A one-sample t-test would be wrong because I'm comparing two groups, not one group against a fixed target. The independent t-test is the correct choice."
+      },
+      {
+        q: "What does a p-value of ≈ 0 actually mean?",
+        a: "The p-value answers this specific question: if H₀ were true (no weather effect), what is the probability of observing a difference this large or larger purely by chance? A p-value of ≈ 0 means: if bad weather truly had no effect on ride duration, getting a t-statistic of 6.84 or higher purely from sampling variability would be essentially impossible. So we reject H₀ — the data is not consistent with 'no weather effect.' Important caveat: p-value does NOT measure the probability that H₀ is true, nor the probability that H₁ is true. It only tells you how surprising the observed result is under the assumption of H₀."
+      },
+      {
+        q: "What does a t-statistic of 6.84 tell you?",
+        a: "The t-statistic measures how many standard errors separate the two group means. t = 6.84 means the observed difference in means (bad weather minus good weather) is 6.84 times larger than the standard error of that difference. Practically: a t-statistic above ~2.0 at α = 0.05 is typically sufficient to reject H₀ with reasonable sample sizes. At 6.84, the signal is extremely strong — the observed difference is almost 7 standard errors away from zero. This is far beyond what you'd expect from random sampling variation. The high t-statistic is why the p-value is essentially zero."
+      },
+      {
+        q: "Why did you remove the 6 rides with 0-second duration?",
+        a: "A ride with 0 seconds duration is a data error — it's physically impossible to complete a Loop-to-O'Hare trip in zero seconds. Including these in the good-weather group would drag its mean downward, artificially inflating the apparent weather effect. The cleaning decision was made before computing any statistics — that order matters. If you explored the data, saw the means, then decided to remove outliers that 'improved' the result, you'd introduce selection bias. Cleaning first based on a principled rule (duration > 0) keeps the analysis legitimate. No bad-weather rides had this issue."
+      },
+      {
+        q: "The bad-weather group only had 180 rides vs. 882 in the good-weather group. Is that a concern?",
+        a: "The unequal sample sizes are worth noting but not a critical problem here. The t-test (Welch's variant via scipy.stats.ttest_ind) is robust to unequal group sizes — it adjusts the degrees of freedom accordingly. The bigger practical concern is whether 180 bad-weather rides is sufficient to draw conclusions. Given the t-statistic of 6.84 and the clear directional consistency of the data, 180 observations is more than enough to detect this effect. The effect would need to be much subtler for sample size to be a limiting factor here. If the bad-weather group had been, say, 20 rides, the robustness question would be more serious."
+      },
+      {
+        q: "What's the difference between statistical significance and practical significance?",
+        a: "Statistical significance asks: is this result unlikely to have occurred by chance? (p < α). Practical significance asks: does the size of the effect actually matter in the real world? These can diverge. With a huge sample, even a 1-second difference in means could be statistically significant — but completely irrelevant to a traveler's decision-making. Here, both dimensions align: the result is statistically significant (p ≈ 0) AND practically meaningful (+6.9 minutes, +20.6%). A 7-minute difference on a 30–40 minute airport trip affects whether passengers make their connections and how they plan their departure. Always report effect sizes alongside p-values — the number alone is not enough."
+      },
+      {
+        q: "What visualizations did you create for the EDA and why?",
+        a: "Two horizontal bar charts: one for top 10 taxi companies by ride volume, one for top 10 neighborhoods by average dropoffs. I chose horizontal bars specifically because the category labels (company names, neighborhood names) are long strings — vertical bars would require rotated labels that are hard to read quickly. Horizontal layout keeps labels left-aligned and easy to scan. Both charts used plt.gca().invert_yaxis() to place the highest-ranked category at the top, matching the natural reading direction (biggest first). For the hypothesis test, box plots and overlapping histograms showed the distribution differences between good and bad weather groups, making the visual gap between means immediately obvious before running any statistics."
+      },
+      {
+        q: "What conclusion did you draw, and what did the result NOT prove?",
+        a: "Conclusion: there is statistically significant evidence that bad weather increases the duration of Loop-to-O'Hare Saturday rides. t = 6.84, p ≈ 0, effect = +6.9 minutes (+20.6%). We reject H₀ at α = 0.05. What it did NOT prove: causation. The hypothesis test shows the two groups have significantly different means — it doesn't prove the mechanism. Bad weather might cause longer rides through slower traffic, more cautious driving, or higher demand overwhelming supply. Those are reasonable inferences from context, not conclusions drawn from the test itself. Rejecting H₀ means the data is inconsistent with 'no effect' — it doesn't tell us exactly how or why weather produces the effect."
+      },
+      {
+        q: "How does this project differ from your ML projects (Sprint 8, Sprint 9)?",
+        a: "Fundamentally different goal. ML projects (Sprint 8 and 9) are predictive: given features about a customer, predict their plan or their churn probability. This project is inferential: given data about taxi rides, draw a statistically valid conclusion about a population-level relationship. There's no model to train, no train/test split, no hyperparameters to tune. The output isn't a prediction — it's a decision (reject or fail to reject H₀) backed by a quantified confidence level. The discipline of setting up hypotheses before seeing results, choosing the right test for the data structure, and reporting effect sizes alongside p-values are skills that transfer directly into any analytical role, even one that never touches ML."
+      },
+      {
+        q: "If you extended this project, what would you do next?",
+        a: "Several directions: (1) Separate the weather effect by day of week or time of day — does bad weather affect early-morning rides differently than afternoon rides? (2) Test the same hypothesis for other high-traffic routes, not just Loop-to-O'Hare. If the weather effect is consistent across routes, it's structural. If it only shows up for the airport route, that's a different finding. (3) Use a Mann-Whitney U test as a non-parametric alternative — the t-test assumes roughly normal distributions, which the data approximates but doesn't guarantee. (4) Build a regression model predicting ride duration using weather, time of day, day of week, and route as features — moving from hypothesis testing to prediction."
+      }
+    ]
+  }
+
   // ── Future projects will be added here ──────────────────────
 ];
