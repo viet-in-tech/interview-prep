@@ -19,6 +19,46 @@ const PROJECTS = [
       {
         q: "Why was CORS needed?",
         a: "Browsers enforce a Same-Origin Policy: a webpage can only make API calls to the same domain it came from. In this project the frontend and the API Gateway were on different origins (different URLs/domains). Without CORS headers, the browser blocks the request entirely — the app breaks. Enabling CORS on API Gateway adds response headers that tell the browser: 'I explicitly allow requests from this other origin — it's safe to proceed.'"
+      },
+      {
+        q: "What is Amazon Bedrock and why use it instead of calling an LLM API directly?",
+        a: "Amazon Bedrock is a managed AWS service that provides access to foundation models (Claude, Llama, Titan, and others) through a single standardized API — without requiring you to host or manage any model infrastructure. The reason to use it instead of calling Anthropic's API directly: (1) AWS credentials and IAM roles handle authentication — no separate API key management. (2) The call stays within AWS's network, reducing latency and keeping data off the public internet. (3) Bedrock integrates natively with other AWS services like Lambda, CloudWatch logging, and VPC endpoints. (4) You can swap foundation models by changing one parameter without restructuring your application. Bedrock is the right choice when you're building on AWS and want managed, scalable access to multiple foundation models under a unified interface."
+      },
+      {
+        q: "How does API Gateway work? What does it actually do in this architecture?",
+        a: "API Gateway is a managed service that exposes HTTP endpoints (REST or WebSocket) and routes incoming requests to backend services — in this case, Lambda. When a user submits study notes, the browser sends an HTTP POST to an API Gateway URL. API Gateway validates the request, applies any transformations or authentication rules, and then triggers the Lambda function — passing the request payload as an event. Lambda processes it, returns a response, and API Gateway forwards that response back to the browser. API Gateway handles: TLS termination (HTTPS), rate limiting, throttling, CORS headers, and logging — without any of that landing in the Lambda function's code."
+      },
+      {
+        q: "Explain the request lifecycle from browser to Bedrock and back.",
+        a: "Full lifecycle: (1) User types study notes in the browser and clicks submit. (2) JavaScript sends an HTTP POST to the API Gateway URL with the notes in the JSON body. (3) API Gateway receives the request, validates it, and invokes the Lambda function — passing the raw HTTP event as a Python dictionary. (4) Lambda extracts the notes from event['body'], calls build_prompt() to format them, then uses the boto3 Bedrock client to call bedrock:InvokeModel with the prompt and model parameters. (5) Bedrock invokes the Claude foundation model, which generates the flashcard JSON. (6) Lambda receives the response, parses the JSON, and returns an HTTP 200 with the flashcards in the body plus CORS headers. (7) API Gateway passes the response back to the browser. (8) JavaScript parses the JSON and renders the flashcards. Every step has a potential failure mode: malformed JSON, missing CORS headers, IAM permission errors, or Bedrock rate limits."
+      },
+      {
+        q: "What is prompt engineering and why does it matter for structured outputs?",
+        a: "Prompt engineering is the practice of designing input text that reliably produces desired outputs from a language model. For a flashcard generator, the desired output is a parseable JSON array — not freeform prose, not JSON with explanation text wrapped around it, not JSON with markdown code fences. Getting that requires: (1) Explicitly specifying the output format with a concrete example. (2) Instructing the model to return ONLY the JSON with no additional commentary. (3) Setting a low temperature (0.3) to reduce creative variation and keep outputs predictable. (4) Using the correct prompt format for the model (Claude's Human:/Assistant: turn structure). The cost of inconsistent output is a parsing error in production — the application breaks for users. Prompt engineering is engineering: the goal is reliability, not creativity."
+      },
+      {
+        q: "What IAM role did Lambda use, and what is the principle of least privilege?",
+        a: "Lambda functions run under an IAM execution role — a set of permissions that defines what AWS resources the function can access. I created a custom policy attached to the Lambda execution role that granted only bedrock:InvokeModel on the specific Claude model ARN. Nothing else — no S3 access, no DynamoDB access, no ability to invoke other Lambda functions. The principle of least privilege states that any entity (user, service, function) should have exactly the permissions it needs to do its job and nothing more. The practical security benefit: if the Lambda function were compromised through a code vulnerability or dependency issue, the blast radius is limited to what that role can do — which is only invoke one specific Bedrock model. Over-permissive roles (e.g., AdministratorAccess) make every service a potential lateral movement vector."
+      },
+      {
+        q: "How does Lambda scale? What happens if 1,000 users submit notes simultaneously?",
+        a: "Lambda scales horizontally and automatically — each invocation runs in its own isolated execution environment. With 1,000 simultaneous requests, AWS spins up up to 1,000 concurrent Lambda instances to handle them in parallel. You don't configure this; it's the default behavior. Each instance is independent — no shared state, no coordination needed. The practical implications: (1) Lambda is naturally stateless — don't store data in memory across invocations because different invocations may run in different containers. (2) Concurrent execution limits exist (soft limit of 1,000 per region by default; can be increased). (3) Cold starts: a new Lambda container takes slightly longer to initialize. For latency-sensitive applications, provisioned concurrency pre-warms instances. (4) The downstream limit is often Bedrock's request rate — at high scale, Bedrock's throttle limits become the bottleneck before Lambda's concurrency does."
+      },
+      {
+        q: "What is a cold start in Lambda and when does it matter?",
+        a: "A cold start occurs when AWS needs to initialize a new Lambda execution environment to handle a request — downloading the function code, starting the runtime (Python), and running any initialization code outside the handler function. This takes additional time: typically 200ms–1s for Python Lambdas depending on package size. A warm start happens when AWS reuses an existing execution environment from a previous invocation, which is nearly instant. Cold starts matter when: (1) Your application is latency-sensitive (a user-facing API where 500ms is noticeable). (2) Traffic is sporadic with long gaps between requests — environments get garbage collected after inactivity. For a flashcard app with occasional traffic, cold starts are acceptable. For a high-frequency trading system or real-time streaming, they're a critical problem. Provisioned concurrency pre-warms a defined number of instances to eliminate cold starts entirely."
+      },
+      {
+        q: "Why use JSON as the communication format between frontend and Lambda?",
+        a: "JSON (JavaScript Object Notation) is the native data format for web browsers — JavaScript objects serialize and deserialize as JSON with JSON.stringify() and JSON.parse() with no third-party library needed. API Gateway natively handles JSON request and response bodies. Lambda receives the body as a string and Python's json.loads() parses it into a dictionary. The entire web application stack (browser → API Gateway → Lambda → response) shares a common, lightweight, human-readable data format. This uniformity reduces friction: no format translation, no schema mismatch, no binary encoding/decoding. The structured flashcard output from Bedrock was also JSON — meaning the entire pipeline used a single format from browser to model and back."
+      },
+      {
+        q: "What would you change or add if you were extending this project?",
+        a: "Several directions: (1) Add DynamoDB persistence — store generated flashcard sets so users can retrieve them later without regenerating. (2) Add a Cognito user pool for authentication — so each user has their own saved sets, and the API is not publicly open. (3) Switch from REST API to a streaming response — Bedrock supports streaming token-by-token output, which would make the UI feel faster (text appears progressively rather than waiting for the full response). (4) Add CloudWatch alarms for Lambda errors and Bedrock throttle responses — currently there's no monitoring. (5) Implement retry logic in Lambda for Bedrock throttling errors with exponential backoff. (6) Add input validation and sanitization in Lambda before sending notes to Bedrock — basic security hygiene for user-provided input."
+      },
+      {
+        q: "What is the difference between REST API and HTTP API in API Gateway?",
+        a: "API Gateway offers two API types: REST API (the original, feature-rich product) and HTTP API (newer, simpler, cheaper). REST API supports: custom authorizers, API keys, usage plans, request/response transformations, built-in caching, WAF integration, and more granular stage management. HTTP API supports: JWT authorizers, Lambda and HTTP integrations, automatic CORS configuration, and is ~70% cheaper per million requests. For this project I used REST API — it has more configuration options and was the standard for AWS curriculum. For a new production project with simple routing and no advanced authorization, HTTP API is usually the better choice due to cost and lower operational complexity."
       }
     ]
   }
@@ -238,6 +278,75 @@ const PROJECTS = [
       {
         q: "If you extended this project, what would you do next?",
         a: "Several directions: (1) Separate the weather effect by day of week or time of day — does bad weather affect early-morning rides differently than afternoon rides? (2) Test the same hypothesis for other high-traffic routes, not just Loop-to-O'Hare. If the weather effect is consistent across routes, it's structural. If it only shows up for the airport route, that's a different finding. (3) Use a Mann-Whitney U test as a non-parametric alternative — the t-test assumes roughly normal distributions, which the data approximates but doesn't guarantee. (4) Build a regression model predicting ride duration using weather, time of day, day of week, and route as features — moving from hypothesis testing to prediction."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "video-game-sales-analysis",
+    title: "Video Game Sales Analysis",
+    subtitle: "EDA & Hypothesis Testing · Market Analysis for Ice",
+    institution: "TripleTen · Sprint 6 — Exploratory Data Analysis",
+    year: "2025",
+    type: "Data Analysis",
+    description: [
+      "Analyzed 16,715 historical video game records to identify the patterns that drive commercial success, building a data-backed 2017 advertising strategy for Ice, an online game retailer. Profiled platform life cycles, regional market preferences across NA, EU, and Japan, and the relationship between critic/user review scores and total sales.",
+      "Ran two independent two-sample t-tests to validate platform and genre rating hypotheses — confirming that Xbox One and PC user ratings are statistically different (t = −4.67, p ≈ 0.000), while Action and Sports ratings are not (t = 1.79, p = 0.074). PS4 emerged as the dominant platform with 28.9% market share and 311M USD in sales across 2013–2016."
+    ],
+    tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "SciPy", "EDA", "Hypothesis Testing", "t-test", "Market Analysis"],
+    qa: [
+      {
+        q: "What was the business goal of this project?",
+        a: "Ice is an online game retailer that needed to plan its 2017 advertising campaigns. The goal wasn't to build a predictive model — it was to use historical sales data (through 2016) to answer: which platforms and genres are worth advertising on? Which regions should get different campaign strategies? Do critic or user review scores actually predict commercial success? And are there statistically significant differences in how players rate games across platforms and genres? Every analytical choice was oriented toward producing findings that could drive a real advertising decision."
+      },
+      {
+        q: "Why did you use 2013–2016 as the analysis window instead of the full dataset?",
+        a: "The dataset spans 1980–2016. Using data from 1985 or even 2005 to predict 2017 behavior would introduce systematic bias — the gaming landscape in those years bears almost no resemblance to the modern market. PS1 and SNES-era patterns don't tell you anything about PS4 purchasing behavior. I analyzed total sales by year and found: sales grew sharply from 2001, peaked around 2006–2009, then declined as mobile gaming and digital distribution disrupted physical retail. By 2013, the market had settled into a smaller, modern set of active platforms (PS4, Xbox One, 3DS, PC). Using 2013–2016 captures a complete modern platform generation cycle — relevant to 2017 without being polluted by outdated dynamics."
+      },
+      {
+        q: "PS4 had a mean sale of 0.82M but a median of 0.20M per game. What does that gap tell you?",
+        a: "The gap tells you the distribution is heavily right-skewed — a small number of blockbuster titles (Grand Theft Auto V, FIFA, Call of Duty) are pulling the mean far above what a typical PS4 game earns. Most PS4 games sold around 0.20M USD or less. The median is the more representative number for a 'typical' game on the platform. For business decisions: if you're allocating advertising dollars, the mean is misleading — it suggests a typical PS4 game earns 0.82M when most earn far less. The median grounds expectations in reality. Any time a mean significantly exceeds the median, you have positive skew, and you should prefer the median as a measure of central tendency."
+      },
+      {
+        q: "Critic Score correlated +0.31 with sales. User Score correlated ≈ 0.00. Why the difference?",
+        a: "Several factors explain the divergence: (1) Selection bias in user scores — users who take the time to rate games are not representative of all buyers. They skew toward enthusiasts who are more likely to rate games they have strong opinions about (very good or very bad), creating noise. (2) Review bombing — user scores are vulnerable to coordinated low-rating campaigns that have nothing to do with the game's commercial quality. (3) Timing — critic scores often precede launch and influence purchasing decisions; user scores accumulate post-purchase and reflect satisfaction, not purchase intent. (4) Volume — critic scores are aggregated from professional outlets with editorial standards; user scores are individual, unvetted. A +0.31 critic score correlation is moderate but meaningful for a noisy industry — it's actionable. User scores are not."
+      },
+      {
+        q: "Japan's market looked very different from NA and EU. What were the key differences?",
+        a: "Three major differences: (1) Genre: Role-Playing games held 30.32% market share in Japan — nearly double the Action share in Japan, and far above RPG's share in NA or EU. NA and EU were dominated by Action, Sports, and Shooter, which together exceeded 50% in both regions. (2) Platform: Japan showed strong preference for handheld platforms — the Nintendo 3DS was a top performer, while it barely registered in NA/EU where console gaming (PS4, Xbox One) dominated. (3) Market structure: the Xbox brand barely exists in Japan — it's a PlayStation and Nintendo market. A retailer running the same campaign in Japan as in NA would be misallocating spend significantly. Japan requires a separate strategy: RPG-heavy with handheld-first platform focus."
+      },
+      {
+        q: "How did you structure the hypothesis tests — what were H₀ and H₁ for each?",
+        a: "Test 1 (Xbox One vs. PC): H₀ = average user ratings for Xbox One and PC are equal; H₁ = they are different. Two-tailed test. Test 2 (Action vs. Sports): H₀ = average user ratings for Action and Sports games are equal; H₁ = they are different. Two-tailed test. Both at α = 0.05. Critically: I stated both hypotheses before computing anything. This matters because if you look at the data, notice a difference, and then run a test to confirm it, you're performing hypothesis testing in bad faith — fitting the question to the answer rather than the other way around. The formal setup (H₀, H₁, α, then compute) is the methodological discipline that makes the result meaningful."
+      },
+      {
+        q: "What did you find in Hypothesis 1 (Xbox One vs. PC ratings), and what does it mean?",
+        a: "Result: t = −4.6711, p ≈ 0.0000. We reject H₀ at α = 0.05. There is statistically significant evidence that Xbox One and PC players rate games differently on average. The negative t-statistic means Xbox One ratings were lower on average than PC ratings in the dataset. Practically: this finding matters for a retailer because it means user ratings are not platform-agnostic. A game with a 7.5 user score on Xbox One is not directly comparable to a 7.5 on PC — those numbers reflect different player communities with different expectations, game libraries, and rating behaviors. Platform should be a moderating variable in any analysis using user scores."
+      },
+      {
+        q: "What did you find in Hypothesis 2 (Action vs. Sports ratings), and what does it mean?",
+        a: "Result: t = 1.7894, p = 0.0737. We fail to reject H₀ at α = 0.05. There is no statistically significant difference between average user ratings for Action and Sports games. This is a meaningful negative result: it challenges the assumption that genre drives user satisfaction. Players don't systematically rate Action games higher or lower than Sports games on average. For advertising: this means genre label alone is not a reliable proxy for expected user satisfaction. Marketing should focus on game-specific features, visuals, franchise recognition, and critic reception rather than assuming genre determines how well a game will be received."
+      },
+      {
+        q: "What is the difference between failing to reject H₀ and proving H₀ is true?",
+        a: "Failing to reject H₀ does not mean H₀ is true — it means the data doesn't provide sufficient evidence to conclude H₁ is true. There's a fundamental asymmetry in hypothesis testing: we can accumulate evidence against H₀ (reject it), but we cannot prove it. With p = 0.0737 (just above α = 0.05), the result is 'fail to reject' — but this could mean: the difference truly doesn't exist, or the sample size wasn't large enough to detect a real but small difference, or the α threshold was set conservatively. A larger dataset might yield a significant result for Action vs. Sports. Null results should be reported honestly rather than spun as 'we proved they're equal.'"
+      },
+      {
+        q: "What data cleaning challenges did you face?",
+        a: "Three main issues: (1) User Score was stored as a string with 'tbd' (to be determined) for unscored games. I replaced 'tbd' with NaN and converted the column to float using pd.to_numeric(errors='coerce'). Failing to handle this would cause the entire column to be treated as object dtype, making numerical operations impossible. (2) Year of Release had missing values and was stored as float — I converted it to nullable integer using pd.to_numeric(errors='coerce'). (3) Three columns had substantial missing data: Critic Score (~51% missing), User Score (~40%), Rating (~40%). Rather than imputing, I ran score-dependent analyses only on records where the score existed, and clearly flagged the coverage limitation in findings."
+      },
+      {
+        q: "Why did you calculate total_sales rather than using regional sales directly?",
+        a: "Total_sales provides a single unified measure of a game's commercial performance — necessary for ranking platforms, genres, and individual titles. Regional breakdown (NA, EU, JP, Other) was preserved for regional profiling, but comparing games across all markets requires a common denominator. Summing NA + EU + JP + Other gives total global physical sales. This also naturally handles the fact that some games are released only in certain regions — they show zeros in non-release markets, which correctly weighs down their global total relative to worldwide releases."
+      },
+      {
+        q: "What were your top recommendations for Ice's 2017 advertising campaigns?",
+        a: "Five prioritized recommendations: (1) Concentrate PS4 and Xbox One campaigns in NA and EU — these platforms dominate both markets, and Action/Sports/Shooter genres have the strongest commercial track record there. (2) Build a separate Japan strategy centered on 3DS and RPG titles — the same campaign that works in NA will underperform in Japan's distinct market. (3) Prioritize multi-platform titles in advertising spend — games like GTA V that released across multiple platforms consistently reach larger audiences and outsell exclusives. (4) Feature critic scores prominently in product pages and promotions — there's a meaningful r = +0.31 correlation with sales; user scores have none. (5) Target E and T-rated titles for broadest reach — ESRB E-rated games had the highest total sales volume; M-rated titles have a loyal but smaller addressable market."
+      },
+      {
+        q: "How does this project differ from your ML projects (Sprints 8 and 9)?",
+        a: "Fundamentally different goal. Sprint 8 (Megaline) and Sprint 9 (Churn) are predictive: given features about a customer, output a classification. There's a target variable, a train/test split, and a numeric performance metric. This project is analytical and inferential: given sales data, understand the market structure and test specific hypotheses. There's no model to train, no validation set, no F1 score. The output is a set of justified business recommendations and two statistical decisions (reject/fail to reject). The discipline here — choosing the right time window, building regional profiles, structuring hypotheses before computing, reporting effect sizes alongside p-values — transfers directly into any data analyst or business intelligence role."
       }
     ]
   }

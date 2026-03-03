@@ -22,6 +22,29 @@ document.addEventListener('DOMContentLoaded', () => {
       hideSearch();
     }
   });
+
+  // Mobile sidebar toggle
+  const sidebarToggle  = document.getElementById('sidebarToggle');
+  const sidebar        = document.getElementById('sidebar');
+  const backdrop       = document.getElementById('sidebarBackdrop');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    backdrop.classList.remove('hidden');
+    backdrop.classList.add('visible');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('visible');
+    backdrop.classList.add('hidden');
+  }
+
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  backdrop.addEventListener('click', closeSidebar);
 });
 
 /* ── Sidebar ──────────────────────────────────────────────── */
@@ -40,7 +63,17 @@ function renderSidebar() {
         <span class="nav-item-qa-count">${project.qa.length} Q&amp;A</span>
       </span>
     `;
-    item.addEventListener('click', () => selectProject(project.id));
+    item.addEventListener('click', () => {
+      selectProject(project.id);
+      // Close sidebar on mobile after selection
+      const sidebar  = document.getElementById('sidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('visible');
+        backdrop.classList.add('hidden');
+      }
+    });
     nav.appendChild(item);
   });
 }
@@ -97,7 +130,7 @@ function renderQA(qaList) {
   const container = document.getElementById('qaList');
   container.innerHTML = '';
 
-  qaList.forEach((item, i) => {
+  qaList.forEach(item => {
     const el = document.createElement('div');
     el.className = 'qa-item';
     el.innerHTML = `
