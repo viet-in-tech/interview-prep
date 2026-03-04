@@ -351,5 +351,74 @@ const PROJECTS = [
     ]
   }
 
+  ,
+  {
+    id: "specright-apache-spark",
+    title: "Specification Management App Powered by Apache Spark",
+    subtitle: "Big Data Architecture · Apache Spark, Amazon EMR & AWS EC2",
+    institution: "Georgia Tech CS 6675 — Big Data Systems & Analytics",
+    year: "2024",
+    type: "Final Project",
+    description: [
+      "Designed a prototype that enhances Specright — a leading specification management platform — with Apache Spark as a Big Data processing backend for Innovation First's VEX Robotics competition product line. Analyzed 85 real customer reviews to identify computing performance gaps, then benchmarked Sort Rate (TB/min) and Runtime (seconds) across Apache Spark, Hadoop MapReduce, and Amazon EMR on three EC2 instance types.",
+      "Built a combined efficiency rubric (Sort Rate + Runtime) and determined that Specright on Amazon EMR 5.28 with a c4.8xlarge EC2 instance is the most efficient configuration — HIGH sort rate and LOW runtime (169.41 seconds). Completed April 20, 2024."
+    ],
+    tags: ["Apache Spark", "PySpark", "Amazon EMR", "AWS EC2", "CloudWatch", "Big Data", "Hadoop MapReduce", "Agile", "Python"],
+    qa: [
+      {
+        q: "What is Apache Spark and how is it different from Hadoop MapReduce?",
+        a: "Apache Spark is a distributed Big Data processing engine that processes data in-memory across a cluster of nodes. Hadoop MapReduce is its predecessor — it writes intermediate results to disk between each map and reduce step, which makes it dramatically slower. Spark keeps data in RAM throughout the computation, making it 10–100x faster than MapReduce for iterative workloads. The 2014 Daytona GraySort benchmark made this concrete: Spark sorted 100 TB using 206 nodes in 23 minutes, while MapReduce sorted 102.5 TB using 2,100 nodes in 72 minutes. Fewer nodes, faster results, lower resource cost — that's the Spark advantage."
+      },
+      {
+        q: "What is Specright and why did it need Apache Spark?",
+        a: "Specright is a specification management platform built on Salesforce and hosted on AWS. It lets companies digitize and manage all their product specifications (specs) and SKUs in one place. It earned 4.5 out of 5 stars from users, so overall it's a solid product. But when I analyzed 85 real customer reviews, I found a recurring cluster of complaints around Computing Speed, Conga Batch Function Issues, and Data Limits — all pointing to the same root cause: the platform struggles when data volumes get large. Apache Spark addresses exactly that — it was designed for processing massive datasets efficiently. That's why the enhancement made sense."
+      },
+      {
+        q: "What metrics did you use to evaluate Big Data platform performance?",
+        a: "Two metrics: Sort Rate and Runtime. Sort Rate (TB/min) measures how much data a platform can sort per minute — it tells you about throughput. Runtime (seconds) measures how long the overall job takes to complete — it tells you about execution speed. Used alone, each metric is incomplete. A HIGH sort rate but HIGH runtime means you can move a lot of data but it takes too long. A LOW runtime but LOW sort rate means you finish quickly but aren't actually processing enough data to be useful. The most efficient configuration is HIGH sort rate AND LOW runtime together. I built a 2x2 efficiency rubric — Very Efficient, Inefficient (two variants), and Extremely Inefficient — to categorize every scenario."
+      },
+      {
+        q: "Which EC2 instance type performed best and why?",
+        a: "The c4.8xlarge was the best-performing instance type. It's a current-generation Compute-Optimized EC2 instance — AWS built it specifically for science and engineering workloads like web servers, high-performance computing, and batch processing. Apache Spark on c4.8xlarge achieved a Sort Rate of 5.56 TB/min, the highest of all configurations I tested. The older instance types (m3.2xlarge and i2.8xlarge) are previous-generation instances — they were relevant in 2013-2014 when the Spark vs. MapReduce benchmarks were run, but they're not the right choice for a new deployment. The lesson: choose compute that's purpose-built for your workload type, and don't use outdated instances when current-generation options exist."
+      },
+      {
+        q: "What is Amazon EMR and why did you add it to the analysis?",
+        a: "Amazon EMR (Elastic MapReduce) is AWS's managed cluster platform for running Big Data frameworks like Apache Spark and Hadoop MapReduce. Instead of manually provisioning EC2 instances and configuring Spark yourself, EMR handles cluster setup, scaling, and optimization automatically. I added EMR to the Design Refinement phase because it can enhance Spark performance further — EMR 5.28 (a newer version) has significant runtime improvements over EMR 5.16. In the referenced AWS study, EMR 5.28 completed in 169.41 seconds vs EMR 5.16's 427.68 seconds — a 2.5x speedup. When I applied the efficiency rubric, Specright on EMR 5.28 was the only configuration that achieved 'Very Efficient' (HIGH sort rate + LOW runtime)."
+      },
+      {
+        q: "Walk me through the architecture of your prototype design.",
+        a: "Innovation First's software development team first gathers all VEX IQ and VEX V5 competition product specs and SKUs — from physical binders to email attachments to ERP data — and imports them into the Specright platform. From there, both the Specright API and the Apache Spark API (via PySpark) run together on an AWS EC2 instance. The Specright API processes and analyzes specs and SKUs for the sales and manufacturing departments. Apache Spark handles the heavy data sorting and processing underneath. Amazon CloudWatch monitors the EC2 instance to measure Sort Rate and Runtime in real time. The results from CloudWatch feed back to the software development team, who use them to make deployment decisions. That CloudWatch monitoring loop is how you get continuous, consistent performance data rather than one-time benchmarks."
+      },
+      {
+        q: "What is PySpark and why was it used?",
+        a: "PySpark is the Python API for Apache Spark. Spark is written in Scala, but PySpark lets you write Spark applications in Python — which is the dominant language for data science and engineering work. Using PySpark meant I could write the Specright API integration in Python (with the requests library for HTTP calls) and also initialize and control the Spark processing engine in the same language. The high-level code outline initialized the Big Data Platform API with PySpark, initialized the Specright API, defined functions to process VEX competition specs and SKUs, defined analysis functions for the sales and manufacturing departments separately, and defined a function to measure Sort Rate (or Runtime in the Design Refinement phase)."
+      },
+      {
+        q: "What is Amazon CloudWatch and how was it used in this project?",
+        a: "Amazon CloudWatch is AWS's monitoring and observability service. It collects metrics, logs, and events from AWS resources in real time — you can set alarms, create dashboards, and analyze performance trends. In this project, CloudWatch was the measurement tool: as Specright ran on the EC2 instance with Apache Spark, CloudWatch captured the Sort Rate and later the Runtime of each configuration. This is how you'd collect empirical performance data in production rather than relying on theoretical benchmarks. CloudWatch can also generate graphs showing performance over time, which is useful for continuous monitoring rather than just one-time measurement."
+      },
+      {
+        q: "How did you use customer reviews as part of your engineering process?",
+        a: "I analyzed 85 real customer reviews from G2.com for the Specright platform. For each review, I went through the 'What do you dislike about Specright?' response and categorized every complaint. I tallied 63 total complaint instances across 18 categories. The top categories included UI Problems (15), Implementation Problems (12), Computing Speed (5), Platform is Too Complex (5), and Searching for Information (5). I highlighted four categories in yellow as the focus for Apache Spark enhancement: Computing Speed, Conga Batch Function Issues, Data Limits/Unnecessary Data, and Implementation Problems. All four point to performance and scalability issues that a Big Data processing layer can address. Starting with real user feedback to define the engineering problem is something I find much more grounding than starting with a technology and looking for a use case."
+      },
+      {
+        q: "What was Design Refinement Scenario 4 and why was it the most likely?",
+        a: "Scenario 4 used the c4.8xlarge EC2 instance type and showed EMR 5.16 performing better than all non-EMR configurations, with EMR 5.28 performing even better than EMR 5.16. Non-EMR options (No Big Data Platform, Apache Spark standalone, Hadoop MapReduce) all had significantly longer runtimes (500–700 seconds) compared to EMR 5.28's 169.41 seconds. I flagged Scenarios 1, 2, and 3 as highly unlikely because in those scenarios non-EMR configurations performed better than EMR — which contradicts the purpose of EMR. EMR should improve on raw Spark by adding managed optimization. Scenario 4 is the most realistic because: (1) c4.8xlarge is the right instance type for this workload, (2) EMR 5.28's speed advantage over EMR 5.16 is real and documented, and (3) running Spark or MapReduce without EMR's managed optimizations should indeed be slower."
+      },
+      {
+        q: "What is the difference between Virtual Machines and Docker containers? Which would you use next?",
+        a: "Virtual Machines (VMs) divide a physical server using a hypervisor — each VM gets its own Guest Operating System, its own copy of the OS kernel, libraries, and runtime. This means VMs are heavier: each one can be gigabytes in size and takes minutes to boot. Docker containers share the host OS kernel — they only package the application and its dependencies, not a full OS. This makes containers much lighter (megabytes, not gigabytes), faster to start (seconds, not minutes), and more efficient per physical server. In this project I used EC2 instances (VMs). In my next design iteration, I would move to Docker containers — likely running on AWS ECS (Elastic Container Service) or EKS (Elastic Kubernetes Service). The hypothesis is that the container overhead reduction would improve runtime further. I'd measure that with CloudWatch using the same Sort Rate + Runtime rubric."
+      },
+      {
+        q: "What is Agile and how did you apply it to this project?",
+        a: "Agile is a project management framework built around iterative development, continuous measurement, and adapting based on findings rather than following a rigid plan. I structured the project using three Agile concepts: Initiative (the high-level business goal — boost the business of Innovation First), Epic (the technical task — enhance Specright with Apache Spark), and User Story (the specific end-user need — sales and manufacturing teams at Innovation First need access to a high-performing Specright platform). The iterative structure played out naturally: I started with a Baseline Design measuring Sort Rate, then moved to Design Refinement adding Runtime and EMR, then built an Evaluation Plan combining both metrics, and finally executed it and reported results. Each phase informed the next — that's Agile in practice."
+      },
+      {
+        q: "If you could extend this project further, what would you do?",
+        a: "A few directions: (1) Move to Docker containerization — test whether container-based deployment of Spark and Specright on ECS or EKS improves runtime over the VM approach, measuring with the same Sort Rate + Runtime rubric. (2) Write actual PySpark code — this project designed the architecture and produced reasoned mock data; the natural next step is to implement the Python functions I outlined and run them against real data. (3) Expand the customer review analysis — 85 reviews is a reasonable sample, but running sentiment analysis or topic modeling across a larger corpus would surface patterns that manual categorization might miss. (4) Test with real VEX Robotics SKU data — Innovation First's actual catalog would let you validate whether the performance projections hold at real data volumes."
+      }
+    ]
+  }
+
   // ── Future projects will be added here ──────────────────────
 ];
