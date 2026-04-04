@@ -421,4 +421,280 @@ const PROJECTS = [
   }
 
   // ── Future projects will be added here ──────────────────────
+
+  ,
+  {
+    id: "house-price-api",
+    title: "House Price Prediction API",
+    subtitle: "Model Deployment · FastAPI & Pydantic",
+    institution: "TripleTen · Sprint 11 — Model Deployment",
+    year: "2026",
+    type: "ML Engineering Project",
+    description: [
+      "Deployed a trained Random Forest regressor as a production-ready REST API using FastAPI and Pydantic — with schema-validated inputs, startup-loaded model, and correct HTTP status codes.",
+      "Iteratively refined through three rounds of reviewer feedback, resolving all issues before final acceptance. Demonstrates ML engineering skills beyond the notebook."
+    ],
+    tags: ["Python", "FastAPI", "Pydantic", "REST API", "Random Forest", "Model Deployment", "Swagger UI"],
+    qa: [
+      {
+        q: "How did you deploy a machine learning model as a service?",
+        a: "Situation: A trained Random Forest regressor needed to be accessible via HTTP — not just as a notebook but as a service that could validate inputs and return structured predictions. Task: Build a production-ready FastAPI application with health monitoring, model introspection, and a prediction endpoint. Action: (1) Defined Pydantic schemas first — HousePredictionRequest with all 13 feature constraints, typed response models for each endpoint. (2) Loaded the model once at startup using @app.on_event('startup') — stored in a global variable for efficient reuse. (3) Maintained feature ordering using metadata['features'] — the exact column order from training, guaranteed consistent. (4) Implemented 503 error handling when the model isn't loaded, 500 for unexpected inference failures. (5) Iteratively refined through three rounds of reviewer feedback. Result: A documented REST API with auto-generated Swagger UI, typed schemas, and health monitoring."
+      },
+      {
+        q: "What HTTP status codes did you use and why?",
+        a: "200 OK: Successful GET requests (/health, /model/info) and successful predictions (/predict). 422 Unprocessable Entity: FastAPI/Pydantic returns this automatically when input validation fails — e.g., a feature value outside its valid range. 503 Service Unavailable: Model not loaded — the service exists but can't fulfill the request. Semantically correct for a startup failure scenario. 500 Internal Server Error: Unexpected inference failures — the model loaded but something went wrong during prediction. Choosing 503 over 500 for the 'model not loaded' case was deliberate — 503 signals a recoverable, operational issue (retry later), while 500 signals an unexpected bug."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "langchain-bedrock-models",
+    title: "Calling Bedrock Models with LangChain",
+    subtitle: "LangChain · ChatBedrock · Prompt Templates · Stateful Chatbot",
+    institution: "AWS Cloud Institute",
+    year: "2026",
+    type: "Applied Project",
+    description: [
+      "Used LangChain to invoke Amazon Bedrock models — comparing boto3 vs. ChatBedrock, building prompt templates, parsing structured output, and developing a stateful context-aware chatbot for AMusicVenue staff scheduling.",
+      "Demonstrated model portability, PromptTemplate reuse, CommaSeparatedListOutputParser for structured output, and per-turn cost tracking via usage_metadata."
+    ],
+    tags: ["Python", "LangChain", "Amazon Bedrock", "ChatBedrock", "PromptTemplate", "CSVLoader", "Message History", "AWS"],
+    qa: [
+      {
+        q: "What is LangChain and why use it instead of boto3 directly?",
+        a: "LangChain is an open-source framework for building applications powered by large language models. It provides high-level abstractions over low-level model APIs — handling request formatting, response parsing, conversation history, and component composition. Why use it over raw boto3: (1) Less boilerplate — a boto3 invocation requires constructing a JSON payload, encoding it, calling invoke_model(), decoding the response body, and navigating nested keys. LangChain reduces this to nova_llm.invoke([('human', prompt)]) returning a clean Python object. (2) Model portability — switching between Claude, Nova, and GPT-4 is a one-line model ID change. (3) Composability — prompts, models, and parsers can be chained: prompt | model | parser. (4) Built-in primitives — message types, streaming, memory, document loaders, and output parsers are production-ready components. From the project: the same boto3 invocation took 7 lines of nested JSON construction and key extraction. The LangChain equivalent took 3 lines with cleaner output."
+      },
+      {
+        q: "What is ChatBedrock and how does it differ from the boto3 bedrock-runtime client?",
+        a: "ChatBedrock (from langchain_aws) is LangChain's high-level chat model wrapper for Amazon Bedrock. It implements the standard LangChain BaseChatModel interface, accepting structured message objects and returning an AIMessage with a clean .content string. Key differences from boto3: (1) Input format — boto3 requires model-specific JSON payload construction; ChatBedrock accepts LangChain's unified message format. (2) Output format — boto3 returns a raw JSON blob requiring chained key extraction; ChatBedrock returns an AIMessage object where response.content is the text. (3) Composability — ChatBedrock works natively with LangChain's chain syntax, prompt templates, and output parsers; boto3 does not. (4) Streaming — ChatBedrock exposes .stream() out of the box; boto3 requires invoke_model_with_response_stream() with manual chunk iteration."
+      },
+      {
+        q: "What are PromptTemplates and why are they better than f-strings?",
+        a: "PromptTemplates separate the structure of a prompt from its variable inputs, similar to how SQL prepared statements separate query structure from query parameters. Why they're better than f-strings for LLM work: (1) Reusability — the same template runs against any number of inputs. In the project, one template generated three purchase orders (soda, napkins, receipt paper) by looping over a list of order dictionaries. (2) Composability — ChatPromptTemplate works directly in LangChain chains (prompt | model | parser) without additional glue code. (3) Format instructions — output parsers inject their required format instructions automatically via {format_instructions}. (4) Versionability — templates are objects that can be stored, loaded, and versioned independently of the calling code. From the project: a PromptTemplate with {product}, {supplier}, {quantity}, and {price} variables was called in a loop — generating each purchase order without any duplicate prompt engineering."
+      },
+      {
+        q: "How do output parsers work and what problem do they solve?",
+        a: "LLM output is always a string. Applications often need structured data — a Python list, a JSON object, a boolean, a typed model. Output parsers handle the conversion. How they work: (1) The parser's get_format_instructions() method returns a string telling the model exactly how to format its output. (2) That instruction string is injected into the prompt via a {format_instructions} variable. (3) After the model responds, the parser's .parse() method converts the string into the target type. From the project: CommaSeparatedListOutputParser converted the model's comma-separated ingredient substitutions into a Python list — ready for direct use in application logic, no custom string parsing needed."
+      },
+      {
+        q: "How did you add statefulness to the chatbot?",
+        a: "LLMs are stateless — every invocation is independent. Statefulness is an application-layer concern implemented by maintaining a message history list. The pattern: (1) Initialize the list with a SystemMessage defining the assistant's role. (2) On each user turn: append a HumanMessage to the list. (3) Invoke the model with the full list (not just the latest message). (4) Append the model's response as an AIMessage to the list. (5) Repeat — the list grows with each exchange. Why it works: the model sees the complete conversation on every invocation. A follow-up like 'Can they swap shifts?' resolves correctly because the names and days from earlier turns are present. Cost implication: input token count grows with each turn as history accumulates. response.usage_metadata was used to calculate per-turn cost — a real operational consideration for long sessions."
+      },
+      {
+        q: "How did you inject document context using CSVLoader?",
+        a: "LangChain's CSVLoader (from langchain_community) loads a CSV file and returns a list of Document objects — one per row — each with a page_content string containing the row data. Implementation: (1) Load the shifts CSV: loader = CSVLoader(file_path='shifts.csv'); docs = loader.load(). (2) Convert to a single string: shifts_string = '\\n'.join([doc.page_content for doc in docs]). (3) Inject into the system message: embed shifts_string directly into the SystemMessage content as structured context. Why this approach: for small structured datasets like a weekly shift schedule, injecting the full document as context is simpler and faster than building a full RAG pipeline with embeddings and vector search. Tradeoff: this is 'context stuffing' — it works for small docs but doesn't scale to large corpora where vector retrieval becomes necessary."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "rag-bedrock-knowledge-base",
+    title: "RAG with Amazon Bedrock Knowledge Bases",
+    subtitle: "S3 → Titan Embeddings → OpenSearch Serverless → Nova Lite",
+    institution: "AWS Cloud Institute",
+    year: "2026",
+    type: "Applied Project",
+    description: [
+      "Built an end-to-end RAG pipeline on Amazon Bedrock: S3 data source → Titan Text Embeddings v2 → OpenSearch Serverless vector store → Nova Lite → RetrieveAndGenerate API.",
+      "System answers questions grounded in 6 internal AnyCompany documents with full source citations — compared against LLM-only responses to demonstrate quality difference."
+    ],
+    tags: ["Python", "Amazon Bedrock", "RAG", "OpenSearch Serverless", "Titan Embeddings", "boto3", "Vector Store", "AWS"],
+    qa: [
+      {
+        q: "What is RAG and why is it important for enterprise AI?",
+        a: "RAG (Retrieval Augmented Generation) enhances LLM responses by retrieving relevant context from an external knowledge source and injecting it into the prompt before generation. Why it matters: (1) LLMs have a knowledge cutoff — they can't answer questions about data created after training, or about proprietary internal documents. (2) Fine-tuning is expensive and requires retraining whenever data changes — RAG provides dynamic, up-to-date context without retraining. (3) Responses are grounded in source documents with traceable citations — critical for enterprise trust and auditability. From the project: an LLM queried directly about AnyCompany's products returned generic answers. The same query routed through the knowledge base retrieved actual product specs from internal documents and generated a grounded, accurate response."
+      },
+      {
+        q: "What are vector embeddings and how do they enable semantic search?",
+        a: "Embeddings are dense numerical vectors that encode the semantic meaning of text. Words or passages with similar meaning have vectors that are close together in high-dimensional space. How semantic search works: (1) At ingestion — each document chunk is converted to an embedding vector and stored in a vector database. (2) At query time — the query is converted to an embedding using the same model. (3) The vector database returns the chunks whose embeddings are most similar to the query vector (approximate nearest-neighbor search). (4) Similarity is measured by cosine similarity or dot product — not keyword overlap. In the project: Amazon Titan Text Embeddings v2 converted both document chunks and incoming queries into vectors. OpenSearch Serverless stored and indexed those vectors, returning the most semantically relevant chunks for each query — even when the wording didn't match exactly."
+      },
+      {
+        q: "What is a vector database and how does it differ from a traditional database?",
+        a: "A vector database is optimized to store, index, and query high-dimensional embedding vectors using approximate nearest-neighbor (ANN) algorithms. Traditional DB: exact matches on structured fields (WHERE customer_id = 123) — fast for exact lookups, useless for semantic similarity. Vector DB: similarity search over dense vectors — 'find the 5 chunks most semantically similar to this query embedding.' Inexact by design, but orders of magnitude faster than brute-force comparison. In the project: OpenSearch Serverless served as the vector store with a bedrock-knowledge-base-default-index. The same role is played by Pinecone, Weaviate, Qdrant, Milvus, or pgvector in custom RAG stacks — the underlying concept is identical across all of them."
+      },
+      {
+        q: "Walk me through the RAG pipeline you built end-to-end.",
+        a: "Situation: AnyCompany's customer support VP needed a POC chat app that could answer questions using 6 internal documents — product descriptions, support tickets, CSAT data, sales records, and an investor summary. Pipeline steps: (1) Data ingestion — uploaded 6 files (CSV + TXT) to an S3 bucket via AWS CLI. (2) Knowledge base creation — created an Amazon Bedrock Knowledge Base pointing to the S3 bucket, with Titan Text Embeddings v2 as the embedding model and OpenSearch Serverless as the vector store. (3) Sync — triggered a sync; Bedrock chunked each document, generated embeddings, and wrote the vectors to the OpenSearch index. (4) Console testing — validated RAG responses via the Bedrock test panel, same questions asked with and without the knowledge base to confirm quality difference. (5) API access — queried the knowledge base programmatically using bedrock-agent-runtime boto3 client and the retrieve_and_generate() method. Result: the system answered AnyCompany-specific questions that an LLM without RAG could not answer — all with source citations pointing back to the S3 documents."
+      },
+      {
+        q: "When would you use RAG vs. fine-tuning an LLM?",
+        a: "Use RAG when: you need the model to answer questions about specific, frequently updated documents; the knowledge changes often (new support tickets, updated product specs); you need traceable source citations; you want to avoid retraining costs and delays. Use fine-tuning when: you want the model to adopt a specific tone, format, or reasoning style; the task requires specialized domain knowledge baked into the model weights (e.g., medical diagnosis, legal reasoning); latency constraints prevent injecting large context windows at query time. The practical reality: most enterprise AI deployments start with RAG because it's faster, cheaper, and more maintainable than fine-tuning. Fine-tuning is reserved for behavior and style changes, not knowledge injection."
+      },
+      {
+        q: "What is the RetrieveAndGenerate API and what does its response structure tell you?",
+        a: "The retrieve_and_generate() method on the bedrock-agent-runtime boto3 client performs the full RAG pipeline in a single API call — retrieval + generation — and returns a structured JSON response. Key response fields: output.text (the generated answer — what you'd show the user); citations[].generatedResponsePart.textResponsePart.text (the specific span of generated output grounded by a retrieved chunk); citations[].retrievedReferences[].content.text (the raw chunk of text retrieved from the knowledge base); citations[].retrievedReferences[].location.s3Location.uri (the S3 URI of the source document — full auditability); sessionId (pass it back in subsequent calls to maintain multi-turn conversation context). The sessionId is what makes follow-up questions like 'Were most of those issues resolved?' work — it links the new query to the prior conversation."
+      },
+      {
+        q: "What happens during a knowledge base sync and why is it required?",
+        a: "A sync processes the raw documents in the S3 bucket into queryable vector embeddings: (1) Chunking — documents are split into smaller text segments to fit within the embedding model's input limit and maximize retrieval precision. (2) Embedding — each chunk is passed through the embedding model (Titan Text Embeddings v2) to produce a dense vector representation. (3) Indexing — the vectors are written to the vector store (OpenSearch Serverless) alongside the original chunk text and source metadata. Why it's required after every data update: the knowledge base doesn't automatically monitor S3 for changes. If you add, update, or delete documents in the bucket, you must trigger a re-sync manually (or via automation) for the vector index to reflect the new state. Until then, queries return results based on the old index."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "instacart-eda",
+    title: "Instacart Customer Behavior EDA",
+    subtitle: "EDA · 4.5M Records · Multi-file Data Merging",
+    institution: "TripleTen · Sprint 2",
+    year: "2025",
+    type: "EDA Project",
+    description: [
+      "Cleaned and analyzed 4.5M order-product records from Instacart's 2017 Kaggle dataset across five CSV files — removing duplicates, resolving two structurally different missing value cases, and merging all five files into a unified dataframe.",
+      "Surfaced peak shopping hours (9AM–4PM), busiest days (Sunday 84K orders), bimodal reorder gaps (7 and 30 days), and top reordered item (Banana: 557,763 reorders) across 206K customers."
+    ],
+    tags: ["Python", "Pandas", "Matplotlib", "Jupyter", "EDA", "groupby", "Missing Value Strategy"],
+    qa: [
+      {
+        q: "Describe an EDA project where you had to handle multiple data quality issues.",
+        a: "Situation: Instacart's 2017 Kaggle dataset contained five interconnected CSV files representing orders, products, aisles, departments, and order-product pairs — with a total of 4.5M order-product records. The data had quality issues across multiple dimensions. Task: Preprocess the data to a clean, analyzable state and then surface behavioral insights about customer shopping patterns. Action: (1) Removed 15 duplicate order records using drop_duplicates() on the orders dataframe. (2) Found 1,258 missing product names — traced all of them to aisle 100 / department 21, which Instacart labels 'missing.' Filled with 'Unknown' rather than dropping, since the orders themselves were valid. (3) Found 836 missing add_to_cart_order values — confirmed they only appeared in orders with 65+ items, likely a data capture ceiling. Left as NaN since imputing arbitrary cart positions would be misleading. (4) Merged all five files into a unified dataframe. (5) Used groupby aggregations to surface shopping hour distributions, day-of-week patterns, reorder gap distributions, and top reordered products. Result: clean, merged dataset enabling full behavioral analysis. Each missing value decision was justified by root-cause investigation — not a blanket drop or fill strategy."
+      },
+      {
+        q: "How do you decide whether to fill or drop missing values?",
+        a: "The decision depends on what the missing value means and how it will be used downstream — not just the percentage missing. In the Instacart project, I had two different missing value situations requiring two different strategies: (1) 1,258 missing product names — all were from aisle 100 / department 21, Instacart's internal label for missing/unlisted products. The orders were real; the products just weren't named. Filling with 'Unknown' was correct because dropping would have removed valid order records from the analysis. (2) 836 missing cart positions (add_to_cart_order) — all appeared in orders with 65+ items. Instacart likely had a capture ceiling — cart positions above 65 weren't recorded. Leaving them as NaN was correct because any value I invented would be fabricated data, not a reasonable imputation. General rule: investigate why values are missing before deciding. Missing at random → impute or drop based on volume. Missing not at random → understand the mechanism first. Structured missingness → preserve it."
+      },
+      {
+        q: "What behavioral patterns did you find, and how would they inform a product decision?",
+        a: "Key findings: Peak shopping hours are 9AM–4PM, peaking around 10AM–11AM, dropping sharply after 8PM. Busiest days are Sunday (84,090 orders) and Monday (82,185) — weekends are the primary restocking days. Reorder gap distribution is bimodal — large spike at 7 days (44,577 orders) and 30 days (51,337). Customers either shop weekly or monthly. Top reordered item is Banana (product_id 24852, 557,763 reorders) — fresh produce dominates repeat purchases. Product implications: (1) Schedule push notifications for Sunday morning — highest reach window for re-engagement. (2) Weekly shoppers (7-day gap cluster) are the highest-frequency segment — targeting them with loyalty incentives has the highest ROI. (3) Fresh produce is the anchor category — a stockout on bananas has outsized impact on customer satisfaction."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "vex-ai-robotics",
+    title: "VEX AI Robotics Competition Enhancement",
+    subtitle: "SpotFi Localization · RGB-D 3D Mapping · P2P Coordination",
+    institution: "Georgia Tech CS6675 · Spring 2024",
+    year: "2024",
+    type: "Research Paper",
+    description: [
+      "Proposed a layered AI system architecture to address the VEX AI Robotics system's critical limitations — the Sensor Fusion Map's forward-only visibility and lack of Z-axis awareness during the elevation scoring phase.",
+      "Designed SpotFi WiFi localization + Intel RealSense RGB-D cameras as a baseline, then a P2P decentralized coordination layer using V5 Radio for real-time data sharing across all four robots' NVIDIA Jetson Nano processors."
+    ],
+    tags: ["AI Architecture", "Sensor Fusion", "Edge AI", "NVIDIA Jetson Nano", "SpotFi", "RGB-D", "P2P Networking", "Robotics"],
+    qa: [
+      {
+        q: "Tell me about a project where you designed an AI system architecture.",
+        a: "Situation: The VEX AI Robotics Competition uses autonomous robots that navigate a 12×12-foot field using GPS sensors, an AI Vision System, and a Sensor Fusion Map. The Sensor Fusion Map could only see directly in front of each robot, and had no Z-axis awareness — making it impossible for robots to compare elevation heights during the scoring phase. Task: Identify the root cause of the system's decision-making failures and propose a concrete, layered architecture to address them. Action: (1) Conducted a need-finding exercise across three match scenarios (start, midmatch, end-of-match elevation phase) to map which limitations caused which failures. (2) Designed a baseline solution: SpotFi WiFi localization (decimeter-level accuracy using existing V5 Radio) + four Intel RealSense RGB-D cameras at field corners for full 3D field visibility. (3) Proposed a design refinement: P2P decentralized coordination via V5 Radio, allowing all four robots to share GPS, vision, and Sensor Fusion data in real time — distributed computing across NVIDIA Jetson Nano processors. (4) Defined quantitative evaluation metrics: match scoring trends, CPU runtime benchmarks, and 3D map rendering quality. Result: a fully designed, layered system architecture with graceful degradation fallbacks, evaluation methodology, and implementation roadmap."
+      },
+      {
+        q: "What is sensor fusion and why is it important in autonomous systems?",
+        a: "Sensor fusion is the process of combining data from multiple sensors to produce a more accurate, complete picture of the environment than any single sensor could provide alone. Each sensor type has blind spots: a GPS gives position but no visual context; a camera gives visual context but no precise depth; an accelerometer gives motion but drifts over time. Fusing them compensates for individual weaknesses. In the VEX AI system, the Sensor Fusion Map combines GPS position data with AI Vision detections to build a timestamped spatial model of the field. The limitation I identified was that fusion was only happening within a single robot's forward-facing perspective — not across the full field or in 3D. Adding RGB-D cameras and P2P data sharing extended fusion to include all four robots' observations simultaneously, creating a shared ground truth."
+      },
+      {
+        q: "What is edge AI and what role does the NVIDIA Jetson Nano play?",
+        a: "Edge AI means running AI inference directly on the device — at the 'edge' of the network — rather than sending data to a cloud server and waiting for a response. For real-time autonomous systems, latency is critical: a robot making a navigation decision can't wait 200ms for a cloud API response. The NVIDIA Jetson Nano is a compact, energy-efficient processor designed for edge AI inference. It runs neural networks and computer vision algorithms locally — fast enough for real-time robotics — without requiring a network connection or cloud compute. In the VEX AI system, the Jetson Nano processes RGB-D camera data and runs the SpotFi localization algorithm on the robot itself. In the P2P design refinement, it also handles the distributed data processing load — receiving observations from peer robots and fusing them with the robot's own sensor data, all within the match's real-time constraints."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "imdb-golden-age",
+    title: "IMDb \"Golden Age\" TV Analysis",
+    subtitle: "Basic Python · Data Preprocessing · Hypothesis Testing",
+    institution: "TripleTen · Sprint 3 — Basic Python",
+    year: "2025",
+    type: "EDA Project",
+    description: [
+      "Tested the hypothesis that highly-rated TV shows from the 'Golden Age' of television (1999+) also receive the most IMDb votes — involving three-stage data preprocessing: column normalization, missing value handling, and implicit duplicate removal.",
+      "Confirmed the hypothesis: shows with scores 7–9 had the highest average vote counts. Analysis covered ~94% of the original dataset after preprocessing."
+    ],
+    tags: ["Python", "Pandas", "EDA", "Hypothesis Testing", "Data Cleaning", "groupby", "Vectorized Operations"],
+    qa: [
+      {
+        q: "Walk me through your data preprocessing approach in this project.",
+        a: "The dataset had three distinct data quality issues: (1) Column name formatting — names had mixed case, leading whitespace, and digit '0' in place of letter 'o'. Fixed with a single pandas chain: df.columns = df.columns.str.lower().str.strip().str.replace('0', 'o'). (2) Missing values — 4,609 rows had no IMDb score and 4,726 had no vote count, about 6% of the data. Since both columns were essential, all rows with any NaN were dropped with df.dropna(inplace=True). (3) Duplicates — 6,994 exact duplicate rows were removed with drop_duplicates(). More subtly, the type column had 9 different strings representing 2 categories — 'SHOW', 'shows', 'tv show', 'tv shows', 'tv', 'tv series' were all treated as separate values. A replace_wrong_show() function collapsed them into a single canonical 'SHOW' value. Key lesson: a reviewer flagged that I was re-importing pandas and re-loading the CSV multiple times throughout the notebook. Real preprocessing mutates the original DataFrame in sequence — it doesn't create new DataFrames at each step."
+      },
+      {
+        q: "Why did you use vectorized pandas methods instead of a loop for column cleaning?",
+        a: "My first version used a custom Python function that looped over the column names list, applying split(), lower(), strip(), and replace() one at a time. A reviewer pointed out this was unnecessarily verbose. The pandas idiom: df.columns.str.lower().str.strip().str.replace('0', 'o') applies all four transformations in a single vectorized operation on the Index object — no loop, no intermediate list, no reassignment. This is both more readable and more efficient because pandas can optimize the operation internally. The broader principle: whenever you're iterating over rows or index values with a Python loop to apply a simple transformation, there's almost always a vectorized pandas equivalent. Learning to reach for .str accessor methods, .apply(), or .map() first — rather than 'for row in df' — is a fundamental skill difference between beginner and intermediate pandas work."
+      },
+      {
+        q: "What are implicit duplicates and how did you handle them?",
+        a: "Implicit duplicates are values that represent the same logical category but are stored as different strings — 'SHOW', 'shows', 'tv show', 'tv shows', 'tv', 'tv series' all mean the same thing but would be treated as six separate categories by any groupby or filter operation. How to find them: df['type'].sort_values().unique() — printing unique values in sorted order makes it easy to visually spot variants of the same category. How to fix them: df['type'].replace(wrong_list, correct_value) maps all variants to a single canonical string. Why they're dangerous: a filter like df[df['type'] == 'SHOW'] would silently miss all rows with 'shows', 'tv show', etc., producing an incomplete subset with no error — the bug is invisible until you check the result size."
+      },
+      {
+        q: "What was the hypothesis and what did you find?",
+        a: "Hypothesis: Highly-rated TV shows released during the 'Golden Age' of television (starting 1999 with The Sopranos) also receive the most IMDb votes — i.e., critical quality and audience engagement correlate. Method: (1) Filtered to shows released 1999 or later, excluding movies. (2) Rounded IMDb scores to integer buckets (1–10) for grouped analysis. (3) Identified outlier buckets with too few shows (scores 2, 3, and 10 excluded). (4) Computed average vote count per score bucket for the valid range (4–9). Result: the hypothesis was confirmed. Shows with scores of 7–9 had the highest average vote counts. Score 4 was a minor exception (outranking 5 and 6), but the top three score buckets clustered at the top of the vote distribution. The analysis covered approximately 94% of the original dataset after preprocessing."
+      },
+      {
+        q: "How would you describe your pandas groupby approach for this analysis?",
+        a: "The core analysis pattern: (1) Round scores: df['score_bucket'] = df['imdb_score'].round() — creates integer buckets 1–10. (2) Filter valid range: Boolean indexing to keep only scores 4–9, removes outlier buckets with too few data points. (3) Aggregate: df.groupby('score_bucket')['imdb_votes'].mean().round() — average votes per score bucket. (4) Rename and sort: .rename(columns={...}).sort_values('Average Votes', ascending=False) — present results clearly. This is a standard aggregation pipeline: filter → group → aggregate → present. The same pattern applies across most exploratory analyses — the specific columns change, the structure doesn't."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "ai-fairness-cs6603",
+    title: "AI Fairness in Housing Lending",
+    subtitle: "Disparate Impact · Reweighting · Fannie Mae 2008 Mortgage Data",
+    institution: "Georgia Tech CS6603 — AI, Ethics, and Society",
+    year: "2024",
+    type: "Research Project",
+    description: [
+      "Applied Disparate Impact (DI) and Statistical Parity Difference (SPD) to 2.5M Fannie Mae 2008 mortgage records across Race and Gender — measuring disparity in LTV at origination and Borrower Income Ratio.",
+      "Applied Reweighting pre-processing bias mitigation and measured whether it survives classifier training. Finding: it doesn't — pre-processing alone is insufficient when structural disparity is encoded in the features themselves."
+    ],
+    tags: ["Python", "AI Fairness", "Disparate Impact", "Statistical Parity Difference", "Reweighting", "sklearn", "Fairness Metrics", "ML Ethics"],
+    qa: [
+      {
+        q: "Tell me about a project where you worked with AI fairness or algorithmic bias.",
+        a: "Situation: For CS6603 at Georgia Tech, I analyzed the 2008 Fannie Mae Single-Family Mortgage Dataset — 2,558,959 real lending decisions made during the year the U.S. housing market collapsed. The dataset contains five variables associated with legally protected classes under the Civil Rights Act and the Equal Pay Act. Task: Measure the extent of racial and gender disparity in two loan outcome variables — LTV at origination and Borrower Income Ratio — using established fairness metric algorithms, then apply a pre-processing bias mitigation technique and determine whether the improvement survives a full classifier training pipeline. Action: (1) Selected Race (Asian as privileged, Black or African American as unprivileged) and Gender (Male as privileged, Female as unprivileged). (2) Computed Disparate Impact (DI) and Statistical Parity Difference (SPD) for all four combinations. (3) Applied Reweighting — a pre-processing bias mitigation algorithm that rebalances sample weights across groups without modifying feature values. (4) Ran both the original and reweighted datasets through a full train/test classifier pipeline and re-measured fairness metrics. Result: Reweighting brought all four DI values into or near the 0.8–1.25 acceptable range and collapsed SPD values to near zero. But after classifier training, fairness metrics reverted to near-original values — demonstrating that pre-processing alone is insufficient when structural disparity is encoded in the features."
+      },
+      {
+        q: "What is Disparate Impact and how is it measured?",
+        a: "Disparate Impact (DI) measures the ratio of the favorable outcome rate for the unprivileged group to the rate for the privileged group: DI = (Unprivileged Group Favorable Rate) / (Privileged Group Favorable Rate). The ideal value is 1.0 — both groups achieve favorable outcomes at the same rate. The legally accepted range in lending and hiring contexts is 0.8–1.25. A DI below 0.8 indicates the unprivileged group achieves favorable outcomes at less than 80% the rate of the privileged group — the 'four-fifths rule' from U.S. employment law. In this project, Race & LTV had DI = 0.7576: Black or African American borrowers achieved favorable LTV outcomes at only 75.76% the rate of Asian borrowers — a 24.24% shortfall below the threshold. Statistical Parity Difference (SPD) is the complement: SPD = Unprivileged Rate − Privileged Rate. Ideal value = 0.0. Race & LTV had SPD = −0.2031: a 20.3 percentage-point gap."
+      },
+      {
+        q: "Why didn't Reweighting fix the bias after classifier training?",
+        a: "Reweighting corrects the distributional imbalance in the dataset by assigning higher weights to underrepresented group-outcome combinations. This succeeds at the dataset level — the reweighted distributions look balanced. But a classifier trained on that data still learns from the feature values themselves. In the Fannie Mae 2008 data, the income and LTV disparities between racial and gender groups are structural: Black borrowers genuinely had lower income ratios and higher LTV at origination in 2008 — not because of random noise, but because of decades of redlining, discriminatory access to credit, and unequal wealth accumulation. Those patterns are baked into the features. A classifier minimizing prediction error on those features will learn to use income and LTV as proxies for race — even without ever seeing the race variable directly. Reweighting adjusts how much each sample contributes to the loss function, but it cannot change what the feature values are. This is why fairness-aware ML requires in-processing techniques (adversarial debiasing, fairness constraints in the objective function) or post-processing adjustments (calibrated equalized odds) — not just data-level fixes."
+      },
+      {
+        q: "What are the regulatory and legal implications of ML bias in lending?",
+        a: "Housing and lending in the U.S. are regulated by several laws: (1) Equal Credit Opportunity Act (ECOA) — prohibits lenders from discriminating based on race, color, religion, national origin, sex, familial status, or handicap. This covers algorithmic lending decisions. (2) Fair Housing Act — prohibits discriminatory housing practices including mortgage lending on the same protected-class basis. (3) Civil Rights Act of 1964 — the legal foundation for protected-class designations. The critical compliance challenge: ECOA prohibits explicit use of protected-class variables, but it cannot prevent a model from learning proxies. A model that never sees 'race' as a feature can still learn that zip code, income ratio, and LTV — all correlated with race due to historical inequity — predict outcomes in ways that produce disparate impact. This is why regulators are increasingly requiring disparate impact testing of ML models. From a practitioner standpoint: if you build a lending model, the model card should include DI and SPD for all relevant protected classes, measured on test data, with a documented mitigation strategy if any metric falls outside the 0.8–1.25 range."
+      }
+    ]
+  }
+
+  ,
+  {
+    id: "megaline-sda",
+    title: "Megaline Prepaid Plan SDA",
+    subtitle: "Statistical Data Analysis · Two-Sample T-Test · Revenue Analysis",
+    institution: "TripleTen Sprint 3 — Statistical Data Analysis",
+    year: "2025",
+    type: "EDA Project",
+    description: [
+      "Compared Megaline's Surf and Ultimate prepaid plans across 500 clients using SDA tools — barplots, histograms, boxplots — and two-sample t-tests to determine which plan is more profitable and whether NY-NJ users differ from the rest of the country.",
+      "Result: T=−8.23, p≈0 — Surf generates significantly more average revenue ($50.33 vs $47.31) despite costing 3.5× less, due to high overage rates. No significant regional difference found."
+    ],
+    tags: ["Python", "Pandas", "NumPy", "scipy.stats", "Matplotlib", "Statistical Hypothesis Testing", "SDA", "EDA"],
+    qa: [
+      {
+        q: "Walk me through a project where you used statistical analysis to drive a business decision.",
+        a: "Situation: Megaline, a telecom operator, offers two prepaid plans — Surf ($20/mo, 500 min, 50 messages, 15 GB) and Ultimate ($70/mo, 3000 min, 1000 messages, 30 GB). Their commercial team needed to know which plan generates more actual revenue to allocate advertising budget. Task: Using behavioral data for 500 clients across 2018, compute per-user monthly revenue, analyze usage patterns, and formally test whether mean revenues differ significantly. Action: (1) Merged 5 CSV tables and computed per-user monthly aggregates using .dt.to_period('M') and groupby. (2) Built a calculate_revenue() function applying plan-specific overage rates. (3) Applied np.ceil() rounding per call for minutes and aggregate for internet GB — matching real telecom billing rules. (4) Visualized behavior distributions using barplots, histograms, and boxplots. (5) Ran a two-sample t-test: Surf (n=1573 user-months, mean=$50.33, std=$55.26) vs. Ultimate (n=720, mean=$47.31, std=$11.40). Result: T=−8.23, p≈0 — rejected H0. Surf generates significantly more revenue. A second t-test on NY-NJ vs. the rest returned T=0.89, p=0.38 — no regional difference. Recommendation: prioritize Surf plan advertising."
+      },
+      {
+        q: "How did you compute monthly revenue per user, and what were the key engineering decisions?",
+        a: "Key decisions: (1) Rounding rules — minutes are rounded up per call using np.ceil() before aggregation: a 1.3-minute call bills as 2 minutes. Internet GB are rounded up at the aggregate monthly level — not per session. This matches real telecom billing and materially affects revenue calculations. (2) Overage calculation — each plan includes a monthly allotment. Users only pay for what exceeds the plan limit: overage = max(0, actual_usage - plan_limit). Surf overages: $0.03/min, $0.03/message, $10/GB. Ultimate overages: $0.01/min, $0.01/message, $7/GB. Base monthly fee is always charged regardless of usage. (3) Monthly aggregation — used .dt.to_period('M') to convert timestamps to year-month periods, then groupby(['user_id', 'year_month']) to aggregate usage. (4) Missing months — users who made no calls in a given month still owe their base plan fee. Used fillna(0) after merges to ensure missing activity rows are treated as zero usage, not excluded from revenue."
+      },
+      {
+        q: "Explain the two-sample t-test you ran. What assumptions does it make and were they met?",
+        a: "A two-sample independent t-test tests whether the means of two independent groups differ significantly. H0: population means are equal. H1: they differ. Assumptions: (1) Independence — the two samples (Surf vs. Ultimate users) are independent by design, since a user is on one plan. (2) Normality — with n=1573 and n=720, the Central Limit Theorem guarantees the sampling distribution of the mean is approximately normal regardless of the underlying distribution shape. (3) Homogeneity of variance — Surf std ($55.26) vs. Ultimate ($11.40) differ substantially. Used equal_var=False (Welch's t-test) in scipy.stats.ttest_ind. Results: H1 (Surf vs. Ultimate): T=−8.23, p≈0 → reject H0. H2 (NY-NJ vs. others): T=0.89, p=0.38 → fail to reject H0. The negative T-statistic reflects that Surf was computed as Group 1 — the sign just indicates direction. What matters is the magnitude (8.23) and p-value (essentially 0)."
+      },
+      {
+        q: "The Surf plan is cheaper ($20 vs $70) but generates more revenue. How is that possible?",
+        a: "Surf generates more revenue because its users exceed the plan limits frequently, and the overage rates add up. Surf's monthly allotments are deliberately modest: 500 minutes, 50 messages, 15 GB. Many users regularly exceed these — particularly on internet usage, where the $10/GB overage rate is significant. A user who uses 20 GB in a month pays $20 (base) + $50 (5 GB overage × $10) = $70 — the same as the Ultimate base fee — without even being on Ultimate. The standard deviation tells the story: Surf std=$55.26 vs. Ultimate std=$11.40. Ultimate users are predictable — they pay $70/month with minimal overages. Surf users are variable — some pay close to $20, others pay $80–100+ in heavy months. The t-test showed Surf's mean is significantly higher even accounting for that variance."
+      },
+      {
+        q: "What did the barplots, histograms, and boxplots tell you that the t-test didn't?",
+        a: "The t-test answers one question: do means differ significantly? The visualizations answered different questions about shape, spread, and patterns. Barplots (mean usage by month): showed that usage grows across 2018 — call minutes, messages, and internet all trend upward. This temporal growth pattern is invisible in an aggregate t-test and matters for forecasting and capacity planning. Histograms (distribution shape): revealed that call minute distributions are right-skewed — most users cluster near the plan limits, with a long tail of heavy users. Internet usage histograms showed a bimodal shape for Surf users, suggesting two clusters: light users who stay within limits and heavy users who consistently overage. Boxplots (spread and outliers): made the variance difference between plans immediately visible. Ultimate boxplots are compact; Surf boxplots have long upper whiskers and numerous high outliers. The visualizations also validated data cleaning decisions before running any statistical tests — this is why SDA always precedes hypothesis testing."
+      }
+    ]
+  }
 ];
