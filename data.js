@@ -538,10 +538,11 @@ const PROJECTS = [
     id: "instacart-eda",
     title: "Instacart Customer Behavior EDA",
     subtitle: "EDA · 4.5M Records · Multi-file Data Merging",
-    institution: "TripleTen · Sprint 2",
+    institution: "TripleTen · Sprint 2 — Exploratory Data Analysis (EDA)",
     year: "2025",
     type: "EDA Project",
     description: [
+      "Sprint 2 Purpose: To conduct an Exploratory Data Analysis (EDA) by developing the skills of cleaning and analyzing data with an actual dataset from Instacart, a grocery delivery platform. Completed February 3, 2025.",
       "Cleaned and analyzed 4.5M order-product records from Instacart's 2017 Kaggle dataset across five CSV files — removing duplicates, resolving two structurally different missing value cases, and merging all five files into a unified dataframe.",
       "Surfaced peak shopping hours (9AM–4PM), busiest days (Sunday 84K orders), bimodal reorder gaps (7 and 30 days), and top reordered item (Banana: 557,763 reorders) across 206K customers."
     ],
@@ -633,12 +634,13 @@ const PROJECTS = [
     id: "ai-fairness-cs6603",
     title: "AI Fairness in Housing Lending",
     subtitle: "Disparate Impact · Reweighting · Fannie Mae 2008 Mortgage Data",
-    institution: "Georgia Tech CS6603 — AI, Ethics, and Society",
+    institution: "Final Project · Georgia Tech OMSCS CS6603 — AI, Ethics, and Society",
     year: "2024",
-    type: "Research Project",
+    type: "Final Project",
     description: [
-      "Applied Disparate Impact (DI) and Statistical Parity Difference (SPD) to 2.5M Fannie Mae 2008 mortgage records across Race and Gender — measuring disparity in LTV at origination and Borrower Income Ratio.",
-      "Applied Reweighting pre-processing bias mitigation and measured whether it survives classifier training. Finding: it doesn't — pre-processing alone is insufficient when structural disparity is encoded in the features themselves."
+      "Final Project for CS6603 (AI, Ethics, and Society) in the Georgia Tech OMSCS program. Completed November 24, 2024.",
+      "Applied Disparate Impact (DI) and Statistical Parity Difference (SPD) to 2,558,959 Fannie Mae 2008 mortgage records across Race (Asian vs. Black/African American) and Gender (Male vs. Female) — measuring disparity in LTV at origination and Borrower Income Ratio across 4 combinations, with full frequency distribution tables (Tables 6–9) and DI/SPD formulas (Table 12).",
+      "Applied Reweighting pre-processing bias mitigation (Table 13) and measured whether it survives classifier training via 70/30 and 80/20 train/test splits (Tables 14–17). Finding: it doesn't — the classifier reverts to near-original DI/SPD values (Tables 18–21), demonstrating that pre-processing alone is insufficient when structural disparity is encoded in the features themselves."
     ],
     tags: ["Python", "AI Fairness", "Disparate Impact", "Statistical Parity Difference", "Reweighting", "sklearn", "Fairness Metrics", "ML Ethics"],
     qa: [
@@ -666,7 +668,7 @@ const PROJECTS = [
     id: "megaline-sda",
     title: "Megaline Prepaid Plan SDA",
     subtitle: "Statistical Data Analysis · Two-Sample T-Test · Revenue Analysis",
-    institution: "TripleTen Sprint 3 — Statistical Data Analysis",
+    institution: "TripleTen · Sprint 3 — Statistical Data Analysis (SDA)",
     year: "2025",
     type: "EDA Project",
     description: [
