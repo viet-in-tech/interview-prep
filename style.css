@@ -396,7 +396,7 @@ body {
   transition: max-height 0.35s ease, padding var(--trans);
 }
 
-.qa-item.open .qa-answer { max-height: 600px; }
+.qa-item.open .qa-answer { max-height: 1600px; }
 
 .qa-answer-inner {
   padding: 0 1.25rem 1.25rem;
@@ -410,6 +410,15 @@ body {
   color: var(--green);
   font-weight: 600;
   margin-bottom: 0.5rem;
+}
+
+.star-label {
+  color: #7dd3fc;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .qa-answer-text {
@@ -561,7 +570,7 @@ mark {
   .detail-title { font-size: 1.35rem; }
 
   /* QA answer max-height increase for longer answers on mobile */
-  .qa-item.open .qa-answer { max-height: 1200px; }
+  .qa-item.open .qa-answer { max-height: 2400px; }
 
   /* Empty state fills screen properly */
   .empty-state {
