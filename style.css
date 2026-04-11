@@ -125,6 +125,52 @@ body {
   padding: 0 1rem 0.5rem;
 }
 
+/* ── Sidebar Category Dropdowns ───────────────────────────── */
+.sidebar-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  transition: color var(--trans), background var(--trans);
+  user-select: none;
+  border-left: 2px solid transparent;
+}
+
+.sidebar-category:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+.sidebar-category.open {
+  color: var(--accent);
+}
+
+.sidebar-category-chevron {
+  font-size: 0.55rem;
+  opacity: 0.6;
+  transition: transform var(--trans);
+  flex-shrink: 0;
+}
+
+.sidebar-category.open .sidebar-category-chevron {
+  transform: rotate(90deg);
+  opacity: 1;
+}
+
+.sidebar-category-items {
+  display: none;
+}
+
+.sidebar-category-items.open {
+  display: block;
+}
+
 /* Project nav items */
 .nav-item {
   display: flex;

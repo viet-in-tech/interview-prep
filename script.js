@@ -48,34 +48,90 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ── Sidebar ──────────────────────────────────────────────── */
+const CATEGORY_ORDER = [
+  'Core ML Concepts',
+  'Data Science',
+  'ML Engineering',
+  'From Your Projects',
+  'Startup Experience',
+  'Behavioral'
+];
+
 function renderSidebar() {
   const nav = document.getElementById('projectNav');
   nav.innerHTML = '';
 
+  // Group entries by category
+  const groups = {};
+  CATEGORY_ORDER.forEach(cat => { groups[cat] = []; });
   PROJECTS.forEach(project => {
-    const item = document.createElement('div');
-    item.className = 'nav-item';
-    item.dataset.id = project.id;
-    item.innerHTML = `
-      <span class="nav-item-title">${project.title}</span>
-      <span class="nav-item-meta">
-        ${project.year}
-        <span class="nav-item-qa-count">${project.qa.length} Q&amp;A</span>
-      </span>
-    `;
-    item.addEventListener('click', () => {
-      selectProject(project.id);
-      // Close sidebar on mobile after selection
-      const sidebar  = document.getElementById('sidebar');
-      const backdrop = document.getElementById('sidebarBackdrop');
-      if (sidebar.classList.contains('open')) {
-        sidebar.classList.remove('open');
-        backdrop.classList.remove('visible');
-        backdrop.classList.add('hidden');
-      }
-    });
-    nav.appendChild(item);
+    const cat = project.category || 'From Your Projects';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(project);
   });
+
+  CATEGORY_ORDER.forEach(cat => {
+    const items = groups[cat];
+    if (!items || items.length === 0) return;
+
+    // Category dropdown header
+    const header = document.createElement('div');
+    header.className = 'sidebar-category';
+    header.dataset.category = cat;
+    header.innerHTML = `
+      <span class="sidebar-category-label">${cat}</span>
+      <span class="sidebar-category-chevron">▶</span>
+    `;
+
+    const itemsEl = document.createElement('div');
+    itemsEl.className = 'sidebar-category-items';
+    itemsEl.dataset.category = cat;
+
+    header.addEventListener('click', () => {
+      const isOpen = header.classList.contains('open');
+      header.classList.toggle('open', !isOpen);
+      itemsEl.classList.toggle('open', !isOpen);
+    });
+
+    items.forEach(project => {
+      const item = document.createElement('div');
+      item.className = 'nav-item';
+      item.dataset.id = project.id;
+      item.innerHTML = `
+        <span class="nav-item-title">${project.title}</span>
+        <span class="nav-item-meta">
+          ${project.year}
+          <span class="nav-item-qa-count">${project.qa.length} Q&amp;A</span>
+        </span>
+      `;
+      item.addEventListener('click', () => {
+        selectProject(project.id);
+        const sidebar  = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('visible');
+          backdrop.classList.add('hidden');
+        }
+      });
+      itemsEl.appendChild(item);
+    });
+
+    nav.appendChild(header);
+    nav.appendChild(itemsEl);
+  });
+}
+
+function openCategoryForProject(projectId) {
+  const project = PROJECTS.find(p => p.id === projectId);
+  if (!project) return;
+  const cat = project.category || 'From Your Projects';
+  const header = document.querySelector(`.sidebar-category[data-category="${cat}"]`);
+  const itemsEl = document.querySelector(`.sidebar-category-items[data-category="${cat}"]`);
+  if (header && itemsEl) {
+    header.classList.add('open');
+    itemsEl.classList.add('open');
+  }
 }
 
 function updateProjectCount() {
@@ -90,10 +146,11 @@ function selectProject(id) {
   const project = PROJECTS.find(p => p.id === id);
   if (!project) return;
 
-  // Update sidebar active state
+  // Update sidebar active state + ensure category is open
   document.querySelectorAll('.nav-item').forEach(el => {
     el.classList.toggle('active', el.dataset.id === id);
   });
+  openCategoryForProject(id);
 
   // Show detail panel
   document.getElementById('emptyState').classList.add('hidden');

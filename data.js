@@ -6,6 +6,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Guided Project",
+  category: "From Your Projects",
     description: [
       "Built a serverless AI application on AWS using Lambda, API Gateway, and Amazon Bedrock, connecting an LLM backend to a frontend via a CORS-enabled REST API.",
       "Engineered structured JSON prompts to generate formatted flashcards from study notes, demonstrating end-to-end ownership of a full-stack AI pipeline."
@@ -71,6 +72,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 9 — Feature Engineering",
     year: "2026",
     type: "ML Project",
+  category: "From Your Projects",
     description: [
       "Built a binary classification pipeline to predict whether Beta Bank customers would churn, addressing a real-world class imbalance where only ~20% of customers had left the bank.",
       "Benchmarked three imbalance strategies (class weights, upsampling, downsampling) across Logistic Regression, Decision Tree, and Random Forest — then tuned 108 hyperparameter combinations via GridSearchCV — achieving F1 = 0.6197 and ROC-AUC = 0.8618, exceeding the target of F1 ≥ 0.59."
@@ -152,6 +154,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 8 — Introduction to Machine Learning",
     year: "2025",
     type: "ML Project",
+  category: "From Your Projects",
     description: [
       "Built a binary classification model to recommend whether Megaline telecom customers should be on the Smart or Ultra plan based on their monthly usage behavior (calls, minutes, messages, data).",
       "Evaluated Decision Tree and Random Forest across two validation rounds with hyperparameter tuning, achieving 81.8% accuracy — exceeding the ≥75% project target by +6.8%."
@@ -221,6 +224,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 7 — Exploratory Data Analysis",
     year: "2025",
     type: "Data Analysis",
+  category: "From Your Projects",
     description: [
       "Analyzed Chicago's taxi market using SQL-sourced data, identifying market concentration patterns across 64 taxi companies and dropoff demand across 94 neighborhoods. Flash Cab led with 19,558 rides in a single weekend — nearly 2× the second-place company.",
       "Conducted a formal independent two-sample t-test to determine whether bad weather statistically significantly increases Loop-to-O'Hare ride duration. Result: t = 6.84, p ≈ 0 — bad weather adds ~6.9 minutes (+20.6%) to the average airport trip."
@@ -290,6 +294,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 6 — Exploratory Data Analysis",
     year: "2025",
     type: "Data Analysis",
+  category: "From Your Projects",
     description: [
       "Analyzed 16,715 historical video game records to identify the patterns that drive commercial success, building a data-backed 2017 advertising strategy for Ice, an online game retailer. Profiled platform life cycles, regional market preferences across NA, EU, and Japan, and the relationship between critic/user review scores and total sales.",
       "Ran two independent two-sample t-tests to validate platform and genre rating hypotheses — confirming that Xbox One and PC user ratings are statistically different (t = −4.67, p ≈ 0.000), while Action and Sports ratings are not (t = 1.79, p = 0.074). PS4 emerged as the dominant platform with 28.9% market share and 311M USD in sales across 2013–2016."
@@ -359,6 +364,7 @@ const PROJECTS = [
     institution: "Georgia Tech CS 6675 — Big Data Systems & Analytics",
     year: "2024",
     type: "Final Project",
+  category: "From Your Projects",
     description: [
       "Designed a prototype that enhances Specright — a leading specification management platform — with Apache Spark as a Big Data processing backend for Innovation First's VEX Robotics competition product line. Analyzed 85 real customer reviews to identify computing performance gaps, then benchmarked Sort Rate (TB/min) and Runtime (seconds) across Apache Spark, Hadoop MapReduce, and Amazon EMR on three EC2 instance types.",
       "Built a combined efficiency rubric (Sort Rate + Runtime) and determined that Specright on Amazon EMR 5.28 with a c4.8xlarge EC2 instance is the most efficient configuration — HIGH sort rate and LOW runtime (169.41 seconds). Completed April 20, 2024."
@@ -428,6 +434,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 11 — Model Deployment",
     year: "2026",
     type: "ML Engineering Project",
+  category: "From Your Projects",
     description: [
       "Deployed a trained Random Forest regressor as a production-ready REST API using FastAPI and Pydantic — with schema-validated inputs, startup-loaded model, and correct HTTP status codes.",
       "Iteratively refined through three rounds of reviewer feedback, resolving all issues before final acceptance. Demonstrates ML engineering skills beyond the notebook."
@@ -453,6 +460,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
+  category: "From Your Projects",
     description: [
       "Used LangChain to invoke Amazon Bedrock models — comparing boto3 vs. ChatBedrock, building prompt templates, parsing structured output, and developing a stateful context-aware chatbot for AMusicVenue staff scheduling.",
       "Demonstrated model portability, PromptTemplate reuse, CommaSeparatedListOutputParser for structured output, and per-turn cost tracking via usage_metadata."
@@ -494,6 +502,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
+  category: "From Your Projects",
     description: [
       "Built an end-to-end RAG pipeline on Amazon Bedrock: S3 data source → Titan Text Embeddings v2 → OpenSearch Serverless vector store → Nova Lite → RetrieveAndGenerate API.",
       "System answers questions grounded in 6 internal AnyCompany documents with full source citations — compared against LLM-only responses to demonstrate quality difference."
@@ -539,6 +548,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 2 — Exploratory Data Analysis (EDA)",
     year: "2025",
     type: "EDA Project",
+  category: "From Your Projects",
     description: [
       "Sprint 2 Purpose: To conduct an Exploratory Data Analysis (EDA) by developing the skills of cleaning and analyzing data with an actual dataset from Instacart, a grocery delivery platform. Completed February 3, 2025.",
       "Cleaned and analyzed 4.5M order-product records from Instacart's 2017 Kaggle dataset across five CSV files — removing duplicates, resolving two structurally different missing value cases, and merging all five files into a unified dataframe.",
@@ -569,6 +579,7 @@ const PROJECTS = [
     institution: "Georgia Tech CS6675 · Spring 2024",
     year: "2024",
     type: "Research Paper",
+  category: "From Your Projects",
     description: [
       "Proposed a layered AI system architecture to address the VEX AI Robotics system's critical limitations — the Sensor Fusion Map's forward-only visibility and lack of Z-axis awareness during the elevation scoring phase.",
       "Designed SpotFi WiFi localization + Intel RealSense RGB-D cameras as a baseline, then a P2P decentralized coordination layer using V5 Radio for real-time data sharing across all four robots' NVIDIA Jetson Nano processors."
@@ -598,6 +609,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 3 — Basic Python",
     year: "2025",
     type: "EDA Project",
+  category: "From Your Projects",
     description: [
       "Tested the hypothesis that highly-rated TV shows from the 'Golden Age' of television (1999+) also receive the most IMDb votes — involving three-stage data preprocessing: column normalization, missing value handling, and implicit duplicate removal.",
       "Confirmed the hypothesis: shows with scores 7–9 had the highest average vote counts. Analysis covered ~94% of the original dataset after preprocessing."
@@ -635,6 +647,7 @@ const PROJECTS = [
     institution: "Final Project · Georgia Tech OMSCS CS6603 — AI, Ethics, and Society",
     year: "2024",
     type: "Final Project",
+  category: "From Your Projects",
     description: [
       "Final Project for CS6603 (AI, Ethics, and Society) in the Georgia Tech OMSCS program. Completed November 24, 2024.",
       "Applied Disparate Impact (DI) and Statistical Parity Difference (SPD) to 2,558,959 Fannie Mae 2008 mortgage records across Race (Asian vs. Black/African American) and Gender (Male vs. Female) — measuring disparity in LTV at origination and Borrower Income Ratio across 4 combinations, with full frequency distribution tables (Tables 6–9) and DI/SPD formulas (Table 12).",
@@ -669,6 +682,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 3 — Statistical Data Analysis (SDA)",
     year: "2025",
     type: "EDA Project",
+  category: "From Your Projects",
     description: [
       "Compared Megaline's Surf and Ultimate prepaid plans across 500 clients using SDA tools — barplots, histograms, boxplots — and two-sample t-tests to determine which plan is more profitable and whether NY-NJ users differ from the rest of the country.",
       "Result: T=−8.23, p≈0 — Surf generates significantly more average revenue ($50.33 vs $47.31) despite costing 3.5× less, due to high overage rates. No significant regional difference found."
@@ -697,4 +711,435 @@ const PROJECTS = [
       }
     ]
   }
+
+  ,
+  {
+  id: "ml-fundamentals",
+  title: "ML Fundamentals",
+  subtitle: "Bias-Variance · Regularization · Ensemble Methods",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Core ML Concepts",
+  description: [
+    "Foundation concepts every DS/ML interview will test. These bridge theory and the projects you've already built.",
+    "Covers bias-variance tradeoff, supervised vs. unsupervised vs. reinforcement learning, regularization (L1/L2/Elastic Net), Random Forest mechanics, and cross-validation."
+  ],
+  tags: ["Bias-Variance Tradeoff", "Overfitting", "Underfitting", "Regularization", "Cross-Validation", "Random Forest", "Ensemble Methods"],
+  qa: [
+    {
+      q: "What is the bias-variance tradeoff and how does it affect model selection?",
+      a: "<strong>Bias</strong> is error from wrong assumptions — a model too simple to capture the true pattern (underfitting). <strong>Variance</strong> is error from sensitivity to training data — a model that memorizes noise (overfitting).<br><br>The tradeoff: reducing bias often increases variance and vice versa. You want the sweet spot where total error (bias² + variance + irreducible noise) is minimized.<br><br><strong>Practical example from your work:</strong> In the Beta Bank churn project, a shallow Decision Tree had high bias (F1 = 0.5573). A deep Random Forest with no regularization would have high variance. GridSearchCV helped find the balance — <code>max_depth=10</code>, <code>min_samples_leaf=2</code>."
+    },
+    {
+      q: "What's the difference between supervised, unsupervised, and reinforcement learning?",
+      a: "<ul><li><strong>Supervised:</strong> Labeled training data — the model learns a mapping from inputs to known outputs. Your classification and regression projects are supervised.</li><li><strong>Unsupervised:</strong> No labels — the model finds structure (clusters, embeddings, anomalies) on its own. K-means, PCA, autoencoders.</li><li><strong>Reinforcement:</strong> An agent takes actions in an environment and learns from rewards/penalties. Used in robotics, game AI, recommendation systems.</li></ul><br><br>Your TripleTen projects are all supervised. Be ready to explain how you'd approach an unsupervised problem (e.g., customer segmentation with K-means)."
+    },
+    {
+      q: "What is regularization and when would you use L1 vs L2?",
+      a: "Regularization adds a penalty term to the loss function to prevent overfitting by discouraging large weights.<br><br><ul><li><strong>L2 (Ridge):</strong> Penalty = sum of squared weights. Shrinks all weights toward zero but rarely to exactly zero. Good when all features matter somewhat.</li><li><strong>L1 (Lasso):</strong> Penalty = sum of absolute weights. Drives some weights to exactly zero — effective feature selection. Use when you suspect many features are irrelevant.</li><li><strong>Elastic Net:</strong> Combination of both. Useful when you have many correlated features.</li></ul><br><br>Tree-based methods (Random Forest, XGBoost) don't use L1/L2 regularization directly — they use <code>max_depth</code>, <code>min_samples_leaf</code>, and <code>n_estimators</code> to control complexity."
+    },
+    {
+      q: "How does a Random Forest work and why is it robust?",
+      a: "Random Forest builds an ensemble of decision trees, each trained on a bootstrap sample (random rows with replacement) of the data, with each split considering only a random subset of features. Predictions are averaged (regression) or majority-voted (classification).<br><br><strong>Why it's robust:</strong><br><br><ul><li>Bagging reduces variance — individual trees overfit, but their average does not</li><li>Feature subsampling decorrelates trees, so errors don't all go in the same direction</li><li>Handles mixed feature types and missing data better than linear models</li><li>Out-of-bag (OOB) samples provide a built-in validation estimate</li></ul><br><br><strong>From your projects:</strong> Random Forest was your top model in both the Megaline plan recommendation (81.8% accuracy) and Beta Bank churn prediction (F1 = 0.6197, ROC-AUC = 0.8618)."
+    },
+    {
+      q: "What is cross-validation and why use it instead of a single train/test split?",
+      a: "Cross-validation (CV) splits data into k folds, trains on k-1 folds, and validates on the remaining fold — repeating k times. The final score is averaged across all folds.<br><br><strong>Advantages over a single split:</strong><br><br><ul><li>Every data point is used for both training and validation — more efficient use of limited data</li><li>Reduces variance in the performance estimate — one lucky/unlucky split doesn't drive your conclusion</li><li>Detects overfitting more reliably</li></ul><br><br><strong>In your GridSearchCV:</strong> You used 3-fold CV across 108 hyperparameter combinations — the CV score guided hyperparameter selection without touching the held-out test set."
+    }
+  ]
+},
+
+{
+  id: "model-evaluation",
+  title: "Model Evaluation & Metrics",
+  subtitle: "F1 · ROC-AUC · Precision · Recall · RMSE",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Core ML Concepts",
+  description: [
+    "Choosing the right metric is as important as choosing the right model. This is consistently tested in DS/ML interviews.",
+    "Covers F1 score, ROC-AUC, RMSE vs MAE, and the precision-recall tradeoff with real project examples."
+  ],
+  tags: ["F1 Score", "ROC-AUC", "Precision", "Recall", "RMSE", "MAE", "Accuracy", "Confusion Matrix"],
+  qa: [
+    {
+      q: "When would you use F1 score instead of accuracy?",
+      a: "Use F1 when the classes are imbalanced and both false positives and false negatives have real cost.<br><br><strong>Accuracy pitfall:</strong> In the Beta Bank churn project, a model predicting \"no churn\" for every customer would score 79.6% accuracy — but catch zero churners. That's useless.<br><br>F1 = 2 × (Precision × Recall) / (Precision + Recall). It's the harmonic mean — it punishes models that sacrifice one for the other.<br><br><ul><li><strong>F1 is symmetric</strong> — treats false positives and false negatives equally</li><li><strong>Weighted F1</strong> — accounts for class sizes; useful for multi-class imbalance</li><li><strong>Use accuracy</strong> only when class distribution is balanced and both error types cost the same</li></ul>"
+    },
+    {
+      q: "What is ROC-AUC and what does a score of 0.86 tell you?",
+      a: "ROC (Receiver Operating Characteristic) plots True Positive Rate vs. False Positive Rate at every decision threshold. AUC (Area Under the Curve) summarizes this into a single number.<br><br><strong>Interpretation:</strong><br><br><ul><li><strong>0.5</strong> = random guessing — no discrimination ability</li><li><strong>0.7–0.8</strong> = acceptable for many real-world cases</li><li><strong>0.8–0.9</strong> = good</li><li><strong>0.9+</strong> = excellent (check for data leakage)</li></ul><br><br>Your Beta Bank model scored <strong>0.8618</strong> — meaning it correctly ranks 86.18% of (churner, non-churner) pairs. It genuinely distinguishes between the classes rather than getting lucky on a few predictions.<br><br>AUC is threshold-invariant — it measures discriminative power independent of where you set the classification cutoff, making it useful for comparing models before deployment decisions."
+    },
+    {
+      q: "What is RMSE and when is it the right metric for regression?",
+      a: "RMSE (Root Mean Square Error) = √(mean of squared residuals). It measures the average magnitude of prediction errors in the same units as the target variable.<br><br><strong>When to use:</strong> When large errors are especially bad — squaring amplifies outlier errors. The House Price Prediction API uses RMSE as the model quality metric because a prediction that's off by $100,000 is far worse than one off by $1,000.<br><br><strong>Compared to MAE:</strong> MAE (Mean Absolute Error) treats all error sizes equally. If your business problem penalizes large errors heavily, RMSE is the right choice.<br><br><strong>R²</strong> (coefficient of determination) is another option — it tells you what fraction of variance the model explains. Both RMSE and R² appear in regression model evaluation."
+    },
+    {
+      q: "Explain precision and recall and the tradeoff between them.",
+      a: "<strong>Precision</strong> = TP / (TP + FP) — of everything predicted positive, how many were actually positive? (Minimize false alarms)<br><br><strong>Recall</strong> = TP / (TP + FN) — of all actual positives, how many did we catch? (Minimize misses)<br><br><strong>The tradeoff:</strong> Lowering the decision threshold catches more true positives (↑ recall) but also flags more false positives (↓ precision). Raising it does the opposite.<br><br><strong>Business context matters:</strong><br><br><ul><li><strong>Cancer screening:</strong> Maximize recall — missing a case is catastrophic</li><li><strong>Spam filter:</strong> Maximize precision — false positives (blocking real emails) are costly</li><li><strong>Churn prediction:</strong> Balance both — hence F1. Your model achieved precision = 0.62 and recall = 0.77 on churners, meaning it catches 77% of at-risk customers at the cost of some false alarms.</li></ul>"
+    }
+  ]
+},
+
+{
+  id: "class-imbalance",
+  title: "Class Imbalance",
+  subtitle: "Class Weights · Oversampling · SMOTE",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Core ML Concepts",
+  description: [
+    "You've worked this problem directly. Use your Beta Bank project as the anchor for every answer here.",
+    "Covers class imbalance detection, class weights vs. oversampling vs. undersampling, and SMOTE with real F1 comparison numbers from Sprint 9."
+  ],
+  tags: ["Class Imbalance", "SMOTE", "Oversampling", "Undersampling", "Class Weights", "Imbalanced Data"],
+  qa: [
+    {
+      q: "What is class imbalance and why is it a problem?",
+      a: "Class imbalance occurs when one class significantly outnumbers another in a classification dataset. The model learns to predict the majority class most of the time — achieving high accuracy but failing on the minority class that often represents the actual business problem.<br><br><strong>Your example:</strong> Beta Bank's dataset was 79.6% non-churn / 20.4% churn. Baseline models scoring F1 = 0.55 weren't wrong — they were just defaulting to \"stayed\" most of the time. After applying <code>class_weight='balanced'</code>, F1 jumped to 0.63."
+    },
+    {
+      q: "Compare class weights, oversampling, and undersampling as imbalance strategies.",
+      a: "You tested all three in Sprint 9. Here's the comparison:<br><br><ul><li><strong>Class weights</strong> (<code>class_weight='balanced'</code>): Increases the penalty for misclassifying the minority class. No data manipulation — uses all original samples. F1 = 0.6381 in your project. Best choice when you have enough data and want to keep the natural distribution.</li><li><strong>Oversampling (upsampling):</strong> Duplicates minority class samples until both classes are equal. Increases training set size. F1 = 0.6173. Risk: overfitting to duplicated examples (SMOTE generates synthetic samples instead).</li><li><strong>Undersampling (downsampling):</strong> Removes majority class samples. Faster training, smaller dataset. F1 = 0.5986. Risk: discarding potentially useful information.</li></ul><br><br>All three passed F1 ≥ 0.59. Class weights won because it preserved the full training set and produced the highest F1 and ROC-AUC — with one parameter change."
+    },
+    {
+      q: "What is SMOTE and when would you use it over simple oversampling?",
+      a: "SMOTE (Synthetic Minority Oversampling Technique) generates synthetic minority class samples by interpolating between existing minority samples and their nearest neighbors — rather than just copying them.<br><br><strong>Advantage over simple oversampling:</strong> Avoids exact duplicate samples, reducing overfitting risk. The synthetic points lie in the \"neighborhood\" of real minority examples, adding more realistic variation.<br><br><strong>When to use:</strong> When the minority class is very small, when simple duplication leads to poor generalization, or when you want to combine oversampling with undersampling (SMOTE + ENN or SMOTE + Tomek Links).<br><br><strong>Trade-off:</strong> SMOTE can introduce noise if the minority class is heterogeneous or if the feature space is high-dimensional. Class weights are often a safer starting point."
+    }
+  ]
+},
+
+{
+  id: "feature-engineering",
+  title: "Feature Engineering",
+  subtitle: "Imputation · Encoding · Data Leakage",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Core ML Concepts",
+  description: [
+    "Turning raw data into model-ready inputs. Often where real performance gains come from.",
+    "Covers data leakage prevention, imputation strategy (MAR test + median vs. mean), and encoding strategies (one-hot vs. label vs. target encoding)."
+  ],
+  tags: ["Feature Engineering", "Data Leakage", "Imputation", "One-Hot Encoding", "Label Encoding", "Target Encoding", "StandardScaler"],
+  qa: [
+    {
+      q: "What is data leakage and how do you prevent it?",
+      a: "Data leakage occurs when information from outside the training set — usually from the test set or the future — contaminates the model, leading to overly optimistic evaluation metrics that don't hold in production.<br><br><strong>Common forms:</strong><br><br><ul><li><strong>Train/test leakage:</strong> Fitting a scaler (or imputer) on the entire dataset before splitting — the test set's statistics influence the transformer. Fix: fit only on training data, then transform test data separately.</li><li><strong>Target leakage:</strong> Including a feature that was derived from the target or collected after the event being predicted.</li><li><strong>Lookahead in time series:</strong> Using future values to predict the past.</li></ul><br><br><strong>From your Beta Bank project:</strong> You fit <code>StandardScaler</code> only on <code>X_train</code>, then applied (not refitted) it to validation and test — the correct approach to prevent leakage."
+    },
+    {
+      q: "Why did you use median imputation for missing Tenure values rather than mean?",
+      a: "You ran a <strong>Missing At Random (MAR) test</strong> first — comparing churn rates between customers with and without Tenure data. The difference was less than 1%, confirming the missingness was random (not informative). That made imputation safe.<br><br><strong>Median over mean because:</strong><br><br><ul><li>Median is robust to outliers — customers with 10-year tenure pull the mean upward</li><li>Tenure is roughly uniform in distribution, so median and mean are close anyway</li><li>Only 9.1% of data affected — minimal distortion regardless of choice</li></ul><br><br>The key insight: you validated the imputation assumption <em>before</em> imputing. That's the habit that separates careful data science from guessing."
+    },
+    {
+      q: "When should you use one-hot encoding vs. label encoding vs. target encoding?",
+      a: "<ul><li><strong>One-hot encoding:</strong> Nominal categories with no inherent order (Geography: France, Germany, Spain). Creates binary columns, one per category. Use when cardinality is low (&lt;10–15 categories). In your Beta Bank project, Geography was one-hot encoded.</li><li><strong>Label encoding:</strong> Only appropriate for ordinal categories (e.g., Low=0, Medium=1, High=2) or when the algorithm is tree-based (trees can find splits that recover the meaning). Dangerous with linear models on nominal data.</li><li><strong>Target encoding:</strong> Replaces each category with the mean of the target variable for that group. High cardinality situations (cities, zip codes). Requires careful cross-validation to avoid leakage.</li></ul>"
+    }
+  ]
+},
+
+{
+  id: "statistics",
+  title: "Statistics & Probability",
+  subtitle: "Hypothesis Testing · p-values · CLT",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Data Science",
+  description: [
+    "Foundational to the work you've already done — your Chicago Taxi project used hypothesis testing directly.",
+    "Covers p-values, Type I/II errors, and the Central Limit Theorem with grounded examples from Sprint projects."
+  ],
+  tags: ["p-value", "Hypothesis Testing", "Type I Error", "Type II Error", "Central Limit Theorem", "t-test", "Statistical Significance"],
+  qa: [
+    {
+      q: "What is a p-value and what does it tell you?",
+      a: "The p-value is the probability of observing a result at least as extreme as the one you got, <em>assuming the null hypothesis is true</em>.<br><br><strong>It does NOT tell you:</strong> the probability that the null hypothesis is true, or the size of the effect.<br><br><strong>Common threshold:</strong> α = 0.05. If p &lt; 0.05, you reject the null hypothesis — the result is statistically significant at the 5% level.<br><br><strong>From your Chicago Taxi project:</strong> You tested whether bad weather statistically significantly increases ride duration from the Loop to O'Hare. Result: t = 6.84, p ≈ 0 — far below α = 0.05. You rejected the null hypothesis and confirmed the effect (+20.6% longer rides in bad weather)."
+    },
+    {
+      q: "What's the difference between Type I and Type II errors?",
+      a: "<ul><li><strong>Type I error (False Positive):</strong> Rejecting the null hypothesis when it's actually true. Rate = α (significance level). \"Seeing an effect that isn't there.\"</li><li><strong>Type II error (False Negative):</strong> Failing to reject the null when it's actually false. Rate = β. \"Missing a real effect.\"</li></ul><br><br>Power = 1 - β = probability of detecting a real effect. Increasing sample size improves power.<br><br><strong>In ML terms:</strong> False positive = flagging a loyal customer as a churner (costly call for nothing). False negative = missing a churner who then leaves. Precision/recall/F1 are the ML equivalents of managing these tradeoffs."
+    },
+    {
+      q: "What is the Central Limit Theorem and why does it matter in practice?",
+      a: "The CLT states that the sampling distribution of the sample mean approaches a normal distribution as sample size increases — regardless of the underlying population distribution.<br><br><strong>Why it matters:</strong><br><br><ul><li>Justifies using t-tests and z-tests on non-normal data with large enough samples</li><li>Underpins confidence intervals and hypothesis testing</li><li>Explains why averaging predictions (ensemble methods, bagging) reduces variance</li></ul><br><br>Rule of thumb: n ≥ 30 is often sufficient for the CLT to apply. With smaller samples, rely on non-parametric tests (Mann-Whitney U) or bootstrapping."
+    }
+  ]
+},
+
+{
+  id: "eda-cleaning",
+  title: "EDA & Data Cleaning",
+  subtitle: "Exploratory Analysis · Missing Values · Outliers",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Data Science",
+  description: [
+    "Every project starts here. Your approach to missing data and distribution analysis sets the foundation.",
+    "Covers a structured 7-step EDA process and outlier handling strategies (capping, log transform, removal) with context on when each applies."
+  ],
+  tags: ["EDA", "Data Cleaning", "Missing Values", "Outliers", "Distributions", "Pandas", "Exploratory Data Analysis"],
+  qa: [
+    {
+      q: "Walk me through your EDA process on a new dataset.",
+      a: "A structured EDA process you can describe:<br><br><ol style=\"padding-left:1.5rem; color:var(--text); line-height:1.85; font-size:0.925rem;\"><li style=\"margin-bottom:0.45rem;\"><strong>Shape and types:</strong> <code>df.shape</code>, <code>df.dtypes</code>, <code>df.head()</code> — understand the scale and structure</li><li style=\"margin-bottom:0.45rem;\"><strong>Missing values:</strong> <code>df.isnull().sum()</code> — identify gaps and test if missingness is random (MAR test)</li><li style=\"margin-bottom:0.45rem;\"><strong>Distributions:</strong> Histograms and box plots for numerical features, value counts for categoricals</li><li style=\"margin-bottom:0.45rem;\"><strong>Target analysis:</strong> Check class balance (classification) or target distribution (regression)</li><li style=\"margin-bottom:0.45rem;\"><strong>Correlations:</strong> Heatmap, pairplot — identify multicollinearity and feature-target relationships</li><li style=\"margin-bottom:0.45rem;\"><strong>Outliers:</strong> IQR method or Z-score — decide whether to cap, remove, or investigate</li><li style=\"margin-bottom:0.45rem;\"><strong>Business context:</strong> Validate findings against domain knowledge before modeling</li></ol>"
+    },
+    {
+      q: "How do you handle outliers in a dataset?",
+      a: "There's no universal rule — the right approach depends on why the outlier exists.<br><br><ul><li><strong>Data entry errors:</strong> Fix or remove (a salary of $10,000,000 when others are ~$60,000)</li><li><strong>Rare but real events:</strong> Keep — they may be the most important cases (fraud detection)</li><li><strong>Capping (Winsorization):</strong> Set values beyond the 1st/99th percentile to those boundaries — preserves the row without extreme values distorting the model</li><li><strong>Log transformation:</strong> Compresses right-skewed distributions (income, house prices) — makes outliers less extreme without removing them</li></ul><br><br>Tree-based models are relatively robust to outliers. Linear models are sensitive — preprocessing matters more there."
+    }
+  ]
+},
+
+{
+  id: "sql-data",
+  title: "SQL & Data Wrangling",
+  subtitle: "JOINs · Window Functions · GROUP BY",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "Data Science",
+  description: [
+    "Common in DS interviews alongside Python — your Chicago Taxi project used SQL to pull source data.",
+    "Covers JOIN types, WHERE vs. HAVING with GROUP BY, and window functions (ROW_NUMBER, RANK, LAG, running totals)."
+  ],
+  tags: ["SQL", "JOINs", "Window Functions", "GROUP BY", "HAVING", "Data Wrangling", "Aggregation"],
+  qa: [
+    {
+      q: "What's the difference between INNER JOIN, LEFT JOIN, and FULL OUTER JOIN?",
+      a: "<ul><li><strong>INNER JOIN:</strong> Returns only rows where the key exists in both tables. Most common — only matching records.</li><li><strong>LEFT JOIN:</strong> Returns all rows from the left table, matched rows from the right. Non-matching right rows get NULL. Use when you want all records from one table regardless of match.</li><li><strong>FULL OUTER JOIN:</strong> Returns all rows from both tables. NULLs where no match. Less common — useful for auditing or comparing two datasets.</li></ul><br><br>Analogy: INNER = intersection; LEFT = everything on the left plus overlap; FULL OUTER = everything from both sides."
+    },
+    {
+      q: "When would you use GROUP BY with HAVING vs. WHERE?",
+      a: "<strong>WHERE</strong> filters rows <em>before</em> aggregation. <strong>HAVING</strong> filters <em>after</em> aggregation.<br><br><pre style=\"font-family:'JetBrains Mono',monospace; font-size:0.82rem; background:#0d1829; padding:1rem; border-radius:6px; overflow-x:auto; color:#cdd6f4; margin:0.75rem 0;\">SELECT company_name, COUNT(*) as trip_count\nFROM trips\nWHERE weather = 'bad'           -- filters before aggregation\nGROUP BY company_name\nHAVING COUNT(*) > 1000;         -- filters after aggregation</pre><br><br>Use HAVING when your filter condition involves an aggregate function (COUNT, SUM, AVG). Use WHERE for row-level conditions on base columns."
+    },
+    {
+      q: "What are window functions and when do you use them?",
+      a: "Window functions perform calculations across a set of rows related to the current row, without collapsing them into a single aggregated output (unlike GROUP BY).<br><br><pre style=\"font-family:'JetBrains Mono',monospace; font-size:0.82rem; background:#0d1829; padding:1rem; border-radius:6px; overflow-x:auto; color:#cdd6f4; margin:0.75rem 0;\">SELECT name, salary,\n  AVG(salary) OVER (PARTITION BY department) as dept_avg,\n  RANK()      OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank\nFROM employees;</pre><br><br>Common window functions: <code>ROW_NUMBER()</code>, <code>RANK()</code>, <code>DENSE_RANK()</code>, <code>LAG()</code>, <code>LEAD()</code>, <code>SUM() OVER</code>, <code>AVG() OVER</code>.<br><br>Use when you need running totals, moving averages, ranking within groups, or comparing a row to its neighbors — without losing row-level detail."
+    }
+  ]
+},
+
+{
+  id: "model-deployment",
+  title: "Model Deployment & APIs",
+  subtitle: "FastAPI · Pydantic · REST API · MLOps",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "ML Engineering",
+  description: [
+    "Your two most recent projects cover this directly — House Price API (FastAPI + Pydantic schemas) and Titanic Docker (containerized ML service on Docker Hub). Use whichever fits the question.",
+    "Covers the full deployment pattern: serialize → FastAPI app → startup loading → POST /predict → health endpoints → error handling."
+  ],
+  tags: ["FastAPI", "Pydantic", "REST API", "Model Serving", "joblib", "Model Deployment", "HTTP Status Codes"],
+  qa: [
+    {
+      q: "How would you expose a trained ML model as a REST API?",
+      a: "Your Sprint 11 project is the answer. The pattern:<br><br><ol style=\"padding-left:1.5rem; color:var(--text); line-height:1.85; font-size:0.925rem;\"><li style=\"margin-bottom:0.45rem;\">Serialize the trained model (<code>joblib.dump(model, 'model.pkl')</code>)</li><li style=\"margin-bottom:0.45rem;\">Create a FastAPI application with Pydantic request/response schemas</li><li style=\"margin-bottom:0.45rem;\">Load the model once at startup using <code>@app.on_event(\"startup\")</code> — never per request</li><li style=\"margin-bottom:0.45rem;\">Implement a <code>POST /predict</code> endpoint that accepts validated features, runs inference, and returns a typed response</li><li style=\"margin-bottom:0.45rem;\">Add <code>GET /health</code> and <code>GET /model/info</code> endpoints for monitoring</li><li style=\"margin-bottom:0.45rem;\">Handle errors with appropriate HTTP status codes (503 when model not loaded, 500 for unexpected failures)</li></ol><br><br>FastAPI auto-generates <code>/docs</code> (Swagger UI) from the Pydantic schemas — interactive documentation for free."
+    },
+    {
+      q: "Why is it important to load the model at startup rather than on each request?",
+      a: "Loading a model from disk (deserializing a <code>.pkl</code> file) is expensive — it can take seconds, especially for large ensembles. Loading per request would:<br><br><ul><li>Add latency to every prediction — unacceptable in production</li><li>Saturate I/O under load if many requests arrive simultaneously</li><li>Consume unnecessary CPU and memory (repeated deserialization)</li></ul><br><br>Loading once at startup stores the model in memory, shared across all requests — a single cost paid once. FastAPI's <code>@app.on_event(\"startup\")</code> is the correct hook for this. The global model variable is then read-only during inference, which is thread-safe."
+    },
+    {
+      q: "What is Pydantic and why use it for API input validation?",
+      a: "Pydantic is a Python library that enforces type annotations and constraints at runtime. FastAPI uses it natively to validate request/response bodies.<br><br><strong>Benefits in your House Price API:</strong><br><br><ul><li>Binary amenity flags (garden, garage, pool, etc.) are bounded to <code>[0, 1]</code> — invalid values are rejected before reaching the model</li><li>Area must be positive and ≤ 10,000 sq ft — catches physically impossible inputs</li><li>Coordinates are bounded to valid lat/lng ranges</li><li>Schemas auto-generate the <code>/docs</code> Swagger UI — no separate documentation needed</li><li>Response schemas ensure the API contract is enforced on output too</li></ul><br><br>Without Pydantic, you'd write manual validation checks in every endpoint — tedious, error-prone, and not self-documenting."
+    }
+  ]
+},
+
+{
+  id: "docker",
+  title: "Docker & Containerization",
+  subtitle: "Images · Containers · Docker Hub · Dependency Pinning",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "ML Engineering",
+  description: [
+    "Your Titanic Docker project covers this directly. Use it as your primary example for any containerization or MLOps question.",
+    "Covers image vs. container distinction, why ML engineers use Docker, resolving binary dependency incompatibilities, and the Docker Hub push workflow."
+  ],
+  tags: ["Docker", "Containerization", "Docker Hub", "Dockerfile", "MLOps", "Dependency Management", "Reproducibility"],
+  qa: [
+    {
+      q: "What is Docker and why do ML engineers use it?",
+      a: "Docker is a containerization platform that packages an application and all its dependencies — Python version, libraries, system packages — into an isolated, reproducible environment called a container. Containers run identically regardless of host OS, cloud provider, or developer machine.<br><br><strong>Why ML engineers use it:</strong><br><br><ul><li><strong>Reproducibility:</strong> A model trained in a Docker container with pinned dependencies will produce the same results anywhere. No more \"it works on my machine.\"</li><li><strong>Dependency isolation:</strong> Your training container can use numpy 1.24.3 + pandas 2.0.3 without conflicting with other projects on the same host</li><li><strong>Portability:</strong> Push the image to Docker Hub; anyone runs it with <code>docker pull thetechlearner/titanic-survival-api:v1.0</code> — no setup required</li><li><strong>Production parity:</strong> The container you test locally is identical to what runs on Kubernetes or ECS in production</li></ul><br><br><strong>From your project:</strong> You containerized both training (Jupyter + scikit-learn) and serving (FastAPI + model artifact) as separate containers, then published the serving image to Docker Hub for reviewer validation."
+    },
+    {
+      q: "What is the difference between a Docker image and a Docker container?",
+      a: "<ul><li><strong>Image:</strong> A read-only, layered snapshot of a filesystem — the blueprint. Built from a Dockerfile. Stored in a registry (Docker Hub). Never changes.</li><li><strong>Container:</strong> A running instance of an image. Has its own writable layer on top of the image layers. Multiple containers can run from the same image simultaneously.</li></ul><br><br><strong>Analogy:</strong> An image is a class definition; a container is an instance of that class.<br><br><strong>From your project:</strong> <code>titanic-survival-api</code> is the image; <code>docker run -p 8000:8000 thetechlearner/titanic-survival-api:v1.0</code> starts a container from it. The reviewer pulled the image and ran their own container to validate all endpoints."
+    },
+    {
+      q: "How do you resolve dependency incompatibilities in Docker?",
+      a: "<strong>Situation from your project:</strong> The serving container crashed with <code>ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject</code>.<br><br><strong>Root cause:</strong> numpy was not pinned in <code>requirements.txt</code>, so pip resolved it to a version compiled against a different ABI than pandas expected. Compiled C extensions (pandas, numpy, scikit-learn) must be built against compatible numpy headers.<br><br><strong>Fix:</strong> Pin numpy to a version compatible with your pandas version:<br><br><pre style=\"font-family:'JetBrains Mono',monospace; font-size:0.82rem; background:#0d1829; padding:1rem; border-radius:6px; overflow-x:auto; color:#cdd6f4; margin:0.75rem 0;\"><span style=\"color:#546e7a;\"># requirements.txt — always pin numpy explicitly</span>\nnumpy==1.24.3   <span style=\"color:#546e7a;\"># compatible with pandas 2.0.3</span>\npandas==2.0.3\nscikit-learn==1.3.0</pre><br><br><strong>General rule:</strong> Pin all compiled packages (<code>numpy</code>, <code>pandas</code>, <code>scikit-learn</code>) to known-compatible versions. Unpinned transitive dependencies can silently break compiled extensions at build time or runtime."
+    },
+    {
+      q: "What is Docker Hub and how do you push an image to it?",
+      a: "Docker Hub is the default public container registry — a service where Docker images are stored, versioned, and shared. Images are referenced as <code>username/repo-name:tag</code>.<br><br><strong>Push workflow (from your project):</strong><br><br><ol style=\"padding-left:1.5rem; color:var(--text); line-height:1.85; font-size:0.925rem;\"><li style=\"margin-bottom:0.45rem;\">Create the repository on Docker Hub first (hub.docker.com → Create Repository)</li><li style=\"margin-bottom:0.45rem;\">Tag the local image with your Docker Hub username: <code>docker tag titanic-survival-api thetechlearner/titanic-survival-api:v1.0</code></li><li style=\"margin-bottom:0.45rem;\">Log in: <code>docker login</code></li><li style=\"margin-bottom:0.45rem;\">Push: <code>docker push thetechlearner/titanic-survival-api:v1.0</code></li></ol><br><br><strong>Key lesson:</strong> The image tag prefix must match your Docker Hub account username exactly. Pushing <code>vietnguyen/...</code> when your account is <code>thetechlearner</code> will return <code>push access denied</code>."
+    }
+  ]
+},
+
+{
+  id: "ml-pipelines",
+  title: "ML Pipelines & Production",
+  subtitle: "sklearn Pipeline · Model Drift · Monitoring",
+  institution: "Interview Prep",
+  year: "2025",
+  type: "Core Concept",
+  category: "ML Engineering",
+  description: [
+    "What separates a notebook from a system. Common in mid-level and senior DS/ML interviews.",
+    "Covers sklearn Pipeline benefits (leakage prevention, serialization, reproducibility), model drift types (data drift vs. concept drift), and monitoring strategies."
+  ],
+  tags: ["ML Pipelines", "sklearn Pipeline", "Model Drift", "Data Drift", "Concept Drift", "Production ML", "Model Monitoring"],
+  qa: [
+    {
+      q: "What is a machine learning pipeline and why use one?",
+      a: "An ML pipeline chains preprocessing steps and a model estimator into a single object — so transformations and predictions always happen in the correct order, on the correct data.<br><br><pre style=\"font-family:'JetBrains Mono',monospace; font-size:0.82rem; background:#0d1829; padding:1rem; border-radius:6px; overflow-x:auto; color:#cdd6f4; margin:0.75rem 0;\"><span style=\"color:#c792ea;\">from</span> sklearn.pipeline <span style=\"color:#c792ea;\">import</span> Pipeline\n<span style=\"color:#c792ea;\">from</span> sklearn.preprocessing <span style=\"color:#c792ea;\">import</span> StandardScaler\n<span style=\"color:#c792ea;\">from</span> sklearn.ensemble <span style=\"color:#c792ea;\">import</span> RandomForestClassifier\n\npipe = <span style=\"color:#82aaff;\">Pipeline</span>([\n    (<span style=\"color:#c3e88d;\">'scaler'</span>, <span style=\"color:#64ffda;\">StandardScaler</span>()),\n    (<span style=\"color:#c3e88d;\">'model'</span>,  <span style=\"color:#64ffda;\">RandomForestClassifier</span>(class_weight=<span style=\"color:#c3e88d;\">'balanced'</span>))\n])\npipe.<span style=\"color:#82aaff;\">fit</span>(X_train, y_train)\npipe.<span style=\"color:#82aaff;\">predict</span>(X_test)  <span style=\"color:#546e7a;\"># scaler.transform applied automatically</span></pre><br><br><strong>Key benefits:</strong> Prevents data leakage (scaler fitted only on training data in <code>fit()</code>), simplifies cross-validation, makes the full model serializable as one unit, and is reproducible."
+    },
+    {
+      q: "What is model drift and how would you monitor for it?",
+      a: "<strong>Model drift</strong> occurs when a model's performance degrades in production because the real-world data distribution has changed from what the model was trained on.<br><br><strong>Two types:</strong><br><br><ul><li><strong>Data drift (covariate shift):</strong> The input feature distribution changes (e.g., housing prices shift due to market changes)</li><li><strong>Concept drift:</strong> The relationship between features and target changes (e.g., what predicts churn changes after a product redesign)</li></ul><br><br><strong>Monitoring approaches:</strong><br><br><ul><li>Track prediction distributions over time — sudden shifts signal drift</li><li>Monitor feature statistics (mean, standard deviation) vs. training baselines</li><li>Set up periodic retraining schedules and revalidation against holdout data</li><li>Use tools like Evidently AI, WhyLogs, or AWS Model Monitor</li></ul>"
+    }
+  ]
+},
+
+{
+  id: "titanic-docker",
+  title: "Titanic: Docker & MLOps",
+  subtitle: "Docker · FastAPI · MLOps",
+  institution: "TripleTen",
+  year: "2025",
+  type: "ML Engineering Project",
+  category: "From Your Projects",
+  description: [
+    "Sprint 11 · TripleTen — April 6, 2026. Full MLOps cycle: train inside Docker → containerize FastAPI serving layer → publish to Docker Hub → full reviewer approval.",
+    "Docker Hub: thetechlearner/titanic-survival-api:v1.0 · 81.56% test accuracy · 4 endpoints · all 10 checkpoints green."
+  ],
+  tags: ["Docker", "FastAPI", "MLOps", "Random Forest", "Feature Engineering", "Docker Hub", "scikit-learn", "Python"],
+  qa: [
+    {
+      q: "Walk me through how you containerized a machine learning model for production.",
+      a: "<span class=\"star-label\">Situation</span> A trained Random Forest classifier and a FastAPI serving layer needed to be packaged so anyone could pull and run the API without a local Python environment.<br><br><span class=\"star-label\">Task</span> Containerize both training and serving environments, resolve a binary dependency incompatibility, and publish to Docker Hub.<br><br><span class=\"star-label\">Action</span> <ul><li>Trained the Random Forest model inside a Jupyter Docker container using <code>docker exec titanic-trainer python train_model.py</code></li><li>Built a separate serving image with FastAPI, pinning <code>numpy==1.24.3</code> to resolve a binary incompatibility with <code>pandas==2.0.3</code></li><li>Tagged the image with the correct Docker Hub account (<code>thetechlearner/titanic-survival-api:v1.0</code>), created the repository on Docker Hub, and pushed both <code>v1.0</code> and <code>latest</code> tags</li><li>Validated the API live: Class 1 adult female → 91.5% survival probability, High confidence</li></ul><br><br><span class=\"star-label\">Result</span> Publicly pullable Docker image with 4 endpoints, 81.56% test accuracy, full reviewer approval — all 10 checkpoints green. <code>docker pull thetechlearner/titanic-survival-api:v1.0</code> runs the full API."
+    },
+    {
+      q: "You ran into a dependency error when building the serving container. How did you debug it?",
+      a: "<span class=\"star-label\">Situation</span> The error was: <code>ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject</code>.<br><br><span class=\"star-label\">Task</span> Diagnose the root cause and fix it without changing the core application logic.<br><br><span class=\"star-label\">Action</span> Diagnosed: numpy was missing from <code>requirements.txt</code>. pip resolved it as a transient dependency at an incompatible version — one whose compiled C extension didn't match the ABI expected by pandas 2.0.3. Fix: Added <code>numpy==1.24.3</code> explicitly to <code>requirements.txt</code>, rebuilt the image, reran the container. No error.<br><br><span class=\"star-label\">Result</span> Container ran cleanly. Lesson carried forward: all compiled packages (numpy, pandas, scikit-learn) that interact through their C interfaces must be pinned together. Letting pip resolve any of them unpinned risks silent or explicit binary incompatibilities — especially inside Docker."
+    },
+    {
+      q: "What feature engineering did you apply and how did you ensure consistency between training and inference?",
+      a: "<span class=\"star-label\">Situation</span> The raw Titanic dataset had 7 fields. A richer feature set was needed to improve model performance, but any engineering done at training time had to be reproduced exactly at inference time or predictions would be invalid.<br><br><span class=\"star-label\">Task</span> Engineer informative features from raw inputs and ensure the same transformations were applied consistently at both training and serving time.<br><br><span class=\"star-label\">Action</span> Five engineered features were computed from the raw 7 inputs: <ul><li><strong>FamilySize:</strong> SibSp + Parch + 1</li><li><strong>IsAlone:</strong> boolean — FamilySize == 1</li><li><strong>Title:</strong> extracted from passenger Name (Mr, Mrs, Miss, Master, Other)</li><li><strong>AgeGroup:</strong> Child / Teen / Adult / Middle / Senior buckets</li><li><strong>FareGroup:</strong> Low / Medium / High / VeryHigh from fare quartiles</li></ul> The feature engineering function lived inside the serving container's <code>app.py</code> — applied at inference time to every incoming request before the model saw the data.<br><br><span class=\"star-label\">Result</span> The same transformations that ran during training ran at serving time, applied to the same raw fields. This is the correct pattern: the transformation lives with the model, not with the caller."
+    }
+  ]
+},
+
+{
+  id: "used-car-explorer",
+  title: "Used Car Price Explorer",
+  subtitle: "Streamlit · EDA · Interactive App",
+  institution: "TripleTen",
+  year: "2025",
+  type: "EDA Project",
+  category: "From Your Projects",
+  description: [
+    "Sprint 4 · TripleTen. Interactive Streamlit EDA app on 51,525 used vehicle listings — deployed live on Render. Reveals how condition dominates model year as a pricing signal.",
+    "Live app: tripleten-sprint4-ww34.onrender.com · Built with Plotly Express + Streamlit · GitHub-linked Render deployment."
+  ],
+  tags: ["Streamlit", "EDA", "Plotly", "Data Visualization", "Render", "Python", "Used Cars", "Interactive App"],
+  qa: [
+    {
+      q: "Tell me about a project where you deployed a data application for end users.",
+      a: "<span class=\"star-label\">Situation</span> Sprint 4 required building an interactive EDA tool for a used vehicles dataset — but the deliverable wasn't a notebook. It was a running application that non-technical users could explore directly, without installing Python.<br><br><span class=\"star-label\">Task</span> Perform EDA on 51,525 used car listings and deploy an interactive Streamlit app with four chart types: price distribution, model year by condition, price vs. odometer, and price vs. model year by condition.<br><br><span class=\"star-label\">Action</span> <ul><li>Conducted missing value analysis before producing any visualizations — ensuring findings were grounded in clean data</li><li>Built four interactive Plotly Express charts wrapped in a Streamlit UI with checkbox toggles for each visualization</li><li>Configured a <code>requirements.txt</code>, linked the GitHub repo to Render, and resolved dependency conflicts in the cloud build to produce a live deployment</li></ul><br><br><span class=\"star-label\">Result</span> The live app is deployed at <a href=\"https://tripleten-sprint4-ww34.onrender.com/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:var(--accent);font-weight:600;text-decoration:underline;font-family:'JetBrains Mono',monospace;\">tripleten-sprint4-ww34.onrender.com</a> — no setup required. Any interviewer can open it directly to see the tool in action."
+    },
+    {
+      q: "What did the EDA reveal about used car pricing?",
+      a: "Three findings stand out:<br><br><ul><li><strong>Price distributions are right-skewed</strong> — the median is well below the mean because a long tail of high-value vehicles pulls the average up. Sellers also cluster at round-number psychological anchors ($5K, $10K, $15K) rather than precise market valuations.</li><li><strong>Condition dominates model year as a pricing signal</strong> — a 2010 vehicle in excellent condition frequently lists above a 2014 vehicle in fair condition. Flat price-by-year averages completely miss this interaction.</li><li><strong>Odometer is an incomplete predictor</strong> — the price vs. odometer scatterplot shows a negative correlation, but the variance is wide at every mileage band. A high-mileage excellent-condition vehicle retains far more value than a low-mileage salvage vehicle. You need condition × mileage together.</li></ul>"
+    },
+    {
+      q: "Why use Streamlit instead of just sharing the Jupyter notebook?",
+      a: "A Jupyter notebook requires Python, a compatible environment, and knowing which cell to run — all of which exclude non-technical stakeholders. Streamlit converts the analysis into a web app: the user clicks checkboxes and the charts update. No code visible, no environment to configure.<br><br>More importantly, deploying on Render means the app is accessible via URL. That transforms the project from a local artifact into a shareable deliverable — which is how data science work actually reaches the people it's meant to serve. The analysis is only useful once it can reach its audience."
+    }
+  ]
+},
+
+{
+  id: "techx-robotics",
+  title: "TechX Robotics",
+  subtitle: "Co-Founder & Operations Lead · $43K Revenue",
+  institution: "TechX Robotics — Tustin, CA",
+  year: "2024",
+  type: "Startup Experience",
+  category: "Startup Experience",
+  description: [
+    "Co-Founder & Operations Lead (2024–Present, winding down). A $43,000+ revenue robotics education business based in Tustin, CA.",
+    "Use these stories to demonstrate entrepreneurial ownership, financial rigor, and applied AI decision-making in a real business context."
+  ],
+  tags: ["Startup", "Operations", "Financial Audit", "LLM Evaluation", "Robotics", "VEX Robotics", "Entrepreneurship", "P&L"],
+  qa: [
+    {
+      q: "Tell me about a business you founded and what your role entailed.",
+      a: "<span class=\"star-label\">Situation</span> In 2024, I co-founded TechX Robotics — a robotics education business in Tustin, California — alongside my existing work as an engineering and robotics teacher. The opportunity emerged from years of coaching VEX Robotics teams at the school level: we had the expertise, the demand was clear, and we wanted to build something that extended beyond a single classroom.<br><br><span class=\"star-label\">Task</span> Stand up and run the operational side of the business — managing revenue, inventory, financial records, and competitive programming frameworks — while the business scaled to $43,000+ in total revenue across two fiscal years.<br><br><span class=\"star-label\">Action</span> I took ownership of the full P&amp;L, audited inventory and bank records across both fiscal years, designed the competitive frameworks used by our VEX Robotics teams, and managed day-to-day operations. When discrepancies appeared in financial records, I didn't defer them — I investigated and reconciled them systematically.<br><br><span class=\"star-label\">Result</span> The business reached $43,000+ in revenue. One of the VEX Robotics teams we supported went on to qualify for the World Championship. The experience gave me firsthand ownership of every layer of a small business — financial, operational, and programmatic — and sharpened my instinct for making decisions under uncertainty with real stakes."
+    },
+    {
+      q: "Describe a time you identified and resolved a financial discrepancy with limited documentation.",
+      a: "<span class=\"star-label\">Situation</span> As TechX Robotics entered its wind-down phase, my co-founder and I needed to determine how remaining funds should be distributed. Neither of us had a clean, shared picture of what had actually been spent — especially on equipment purchases that spanned two fiscal years and weren't always properly attributed at the time.<br><br><span class=\"star-label\">Task</span> Reconstruct a complete, defensible financial record from bank statements and inventory logs — accurate enough that both parties could trust it as the basis for final compensation decisions.<br><br><span class=\"star-label\">Action</span> I conducted a full audit of two fiscal years of bank records and inventory purchases, cross-referencing every transaction against physical assets. The process surfaced $7,355+ in unreconciled equipment purchases that had never been formally attributed. I documented each discrepancy with its source record, so every line in the final reconciliation had a traceable origin.<br><br><span class=\"star-label\">Result</span> The audit produced a complete, defensible financial picture that changed the distribution model in a meaningful way. Both parties could see exactly where every dollar went. We resolved the wind-down without dispute — which in a two-founder business is not a given. The rigor I applied here is the same rigor I bring to data work: trace every anomaly to its source before drawing conclusions."
+    },
+    {
+      q: "Tell me about a time you used AI tools to remove bias from a high-stakes decision.",
+      a: "<span class=\"star-label\">Situation</span> After completing the financial audit of TechX Robotics, I needed to build an owner compensation model for the wind-down. The problem: I was both the analyst and one of the beneficiaries. Any model I built alone could be unconsciously skewed toward my own interests — and even if it wasn't, my co-founder had no way to verify that.<br><br><span class=\"star-label\">Task</span> Design a compensation distribution model that was not only mathematically sound but independently verifiable — one that neither party could reasonably claim was biased by the person who built it.<br><br><span class=\"star-label\">Action</span> I ran the same financial scenario through three independent LLM systems — Claude, ChatGPT, and Gemini — giving each the same structured inputs: total revenue, documented contributions, the reconciled expense records, and the distribution question. I treated each LLM as a parallel expert opinion and compared their outputs, looking for convergence rather than taking any single answer at face value. This is the same evaluation methodology used in ensemble modeling — multiple independent estimators reduce variance in the final call.<br><br><span class=\"star-label\">Result</span> All three LLM outputs converged on the same recommended distribution within a narrow range. The convergence gave both parties confidence that the model wasn't an artifact of my framing. We reached agreement without dispute. Beyond the specific outcome, this gave me a concrete, real-world example of applied LLM evaluation — not a classroom exercise, but a decision with actual money and a relationship on the line."
+    },
+    {
+      q: "What did founding a business teach you that no course or project could?",
+      a: "<span class=\"star-label\">Situation</span> I've completed a rigorous ML bootcamp, built production-deployed models, and pursued a graduate degree — but TechX Robotics was the first time I was fully accountable for an outcome that affected another person financially and professionally, with no rubric and no reviewer to fall back on.<br><br><span class=\"star-label\">Task</span> Run a real business — not a simulation. Make financial calls, manage a co-founder relationship, and deliver results in an environment where ambiguity is the default and \"I'll revisit that later\" has real consequences.<br><br><span class=\"star-label\">Action</span> I managed the P&amp;L, reconciled records when they didn't add up, designed competitive frameworks for our teams, and — when the business reached its end — built the tools needed to close it fairly. Every decision had a real downstream effect on someone I worked with closely.<br><br><span class=\"star-label\">Result</span> I came out with a calibrated sense of when to trust a number and when to audit it, how to make a high-stakes call with incomplete information, and what it actually costs to get something wrong when the stakes are real. Those instincts are harder to build in academic settings — and they're the ones that matter most in production data environments where model errors aren't just academic exercises."
+    }
+  ]
+},
+
+{
+  id: "behavioral",
+  title: "Behavioral & Transition Story",
+  subtitle: "Career transition · Soft skills · Teaching background",
+  institution: "Interview Prep",
+  year: "2026",
+  type: "Behavioral",
+  category: "Behavioral",
+  description: [
+    "Your teaching background is a strength — not a liability. Frame it as transferable expertise in structured thinking, communication, and systematic learning.",
+    "Covers transition narrative, feedback handling, problem decomposition, data-driven financial decisions, budget management, and career trajectory."
+  ],
+  tags: ["Career Transition", "Teaching", "Behavioral", "STAR", "Communication", "Problem Solving", "Data-Driven Decisions"],
+  qa: [
+    {
+      q: "Why are you transitioning into data science and AI/ML from teaching?",
+      a: "I've been teaching engineering, robotics, and computer science for nearly a decade — and for the last several years I've been bringing AI/ML concepts into the classroom. That exposure made me want to go deeper into the technical side.<br><br>What teaching gave me: the ability to break down complex systems into understandable components, communicate technical ideas to non-technical audiences, and think systematically about problems. Those skills transfer directly to data science — especially in roles where you're presenting model results to business stakeholders.<br><br>Since 2024, I've been building the technical foundation: completing the TripleTen AI and Machine Learning Bootcamp, pursuing an M.S. in Computer Science at Georgia Tech, earning AWS Cloud Practitioner certification, and building real projects — classification models, a serverless AI application on AWS, and a production-ready FastAPI deployment. The transition is deliberate and built on evidence, not just aspiration."
+    },
+    {
+      q: "Tell me about a time you received critical feedback and how you handled it.",
+      a: "<span class=\"star-label\">Situation</span> In my House Price Prediction API project (Sprint 11), my first submission had all the core logic working correctly — but my reviewer flagged three specific issues: <code>check_health()</code> returned a raw dictionary instead of a Pydantic model, <code>model_version</code> was assigned the entire metadata dict instead of just the version string, and the <code>currency</code> field lacked a default value.<br><br><span class=\"star-label\">Task</span> Address all three reviewer flags and resubmit.<br><br><span class=\"star-label\">Action</span> Rather than treating the feedback as criticism, I treated it as a specification. Each flag pointed to a pattern — consistency, schema enforcement, \"pass only what you need.\" I addressed all three, understood the reasoning behind each change, and resubmitted.<br><br><span class=\"star-label\">Result</span> All three revisions were accepted on the second pass. More importantly, I now carry those principles into any API work I do — they've become habits, not just corrections."
+    },
+    {
+      q: "Describe a complex problem you broke down into manageable parts.",
+      a: "<span class=\"star-label\">Situation</span> The Beta Bank churn prediction problem had several compounding issues at once: missing data, class imbalance, and multiple model candidates.<br><br><span class=\"star-label\">Task</span> Build a model that achieves F1 ≥ 0.59 on the held-out test set, starting from a messy dataset with no clear path forward.<br><br><span class=\"star-label\">Action</span> Instead of tackling everything at once, I structured it as a sequential investigation: <ol style=\"padding-left:1.5rem; color:var(--text); line-height:1.85; font-size:0.925rem;\"><li style=\"margin-bottom:0.45rem;\">First, understand the data — shape, missingness, class distribution</li><li style=\"margin-bottom:0.45rem;\">Validate the imputation assumption (MAR test) before filling values</li><li style=\"margin-bottom:0.45rem;\">Establish baselines with no imbalance correction to understand the baseline problem</li><li style=\"margin-bottom:0.45rem;\">Test each imbalance strategy in isolation to measure its isolated contribution</li><li style=\"margin-bottom:0.45rem;\">Tune only after the strategy is selected — not before</li></ol><br><br><span class=\"star-label\">Result</span> This is the same skill I used in teaching: you can't teach everything at once. You sequence, you validate understanding at each step, and you build systematically. The habit transfers directly."
+    },
+    {
+      q: "Tell me about a time you used data to make a high-stakes financial decision.",
+      a: "<span class=\"star-label\">Situation</span> As Co-Founder and Operations Lead of TechX Robotics — a $43,000+ revenue robotics education business — my co-founder and I reached the wind-down phase and needed to determine fair owner compensation. We had no shared baseline for what each person had actually contributed financially, and the stakes of getting it wrong were both financial and personal.<br><br><span class=\"star-label\">Task</span> Build a rigorous, defensible model for how remaining funds should be distributed — one that both parties could trust, even under disagreement.<br><br><span class=\"star-label\">Action</span> I audited two full fiscal years of inventory records and bank statements, identifying $7,355+ in unreconciled equipment purchases that had not been properly attributed. To remove my own bias from the distribution model, I ran the same financial scenario through three independent LLM systems — Claude, ChatGPT, and Gemini — each given the same structured inputs and asked to recommend a fair distribution. I treated the LLM outputs as parallel expert opinions and used the convergence across all three to validate my own model's conclusions.<br><br><span class=\"star-label\">Result</span> The audit surfaced discrepancies that changed the final distribution meaningfully. The three LLM outputs converged on the same recommendation within a narrow range, which gave both parties confidence that the model was not an artifact of my own framing. We reached agreement without dispute. The process also gave me a concrete example of using LLM evaluation for a real financial decision — not a demo, but an actual outcome with money on the line."
+    },
+    {
+      q: "Tell me about a time you managed a budget and made decisions with incomplete information.",
+      a: "<span class=\"star-label\">Situation</span> At TechX Robotics, I managed full P&amp;L for a robotics education business with $43,000+ in revenue across two fiscal years. At Jeffrey Trail Middle School, I manage an annual $15,000–$20,000 engineering and robotics program budget — deciding which equipment to purchase, what competitions to enter, and how to allocate resources across team needs without certainty about which investments would pay off competitively.<br><br><span class=\"star-label\">Task</span> Allocate limited program funds across competing priorities — equipment, registration fees, travel, and training — while maximizing the probability of competitive success.<br><br><span class=\"star-label\">Action</span> I used prior season results to identify which equipment investments correlated with competitive performance, built a competitive framework for team selection and skill development, and made forward-looking budget decisions based on pattern analysis rather than gut instinct. At TechX, I applied the same rigor to the business side — auditing financial records and reconciling discrepancies before making compensation decisions.<br><br><span class=\"star-label\">Result</span> The school program delivered 4 consecutive World Championship qualifications and 5 consecutive State Championships. TechX reached $43,000+ in revenue. Both outcomes required managing ambiguity and making resource allocation decisions with incomplete data — which is exactly what production data science looks like."
+    },
+    {
+      q: "Where do you see yourself in 2–3 years in data science/AI/ML?",
+      a: "I'm focused on becoming a strong end-to-end ML practitioner — someone who can take a problem from raw data through model training, evaluation, and deployment into a system that other people depend on.<br><br>In 2–3 years I'd like to be working on ML pipelines that actually run in production — where the model is serving real predictions and I'm thinking about monitoring, retraining schedules, and performance over time. The Georgia Tech M.S. is building the theoretical depth; my project work is building the engineering habits. I want both — and I want to use both in a team environment where I can keep learning from people who've shipped models at scale."
+    }
+  ]
+}
 ];
