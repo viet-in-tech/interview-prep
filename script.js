@@ -54,7 +54,8 @@ const CATEGORY_ORDER = [
   'ML Engineering',
   'From Your Projects',
   'Startup Experience',
-  'Behavioral'
+  'Behavioral',
+  'Leadership Principles'
 ];
 
 function renderSidebar() {
