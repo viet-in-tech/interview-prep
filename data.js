@@ -67,7 +67,7 @@ const PROJECTS = [
   ,
   {
     id: "insurance-cost-nn",
-    title: "Predicting Insurance Costs with a Neural Network",
+    title: "Predicting Medical Insurance Costs with Deep Learning",
     subtitle: "Keras Regression · Deep Learning · Dropout Regularization",
     institution: "TripleTen · Sprint 12 — Neural Networks & Deep Learning",
     year: "2026",
