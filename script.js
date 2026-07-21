@@ -52,7 +52,7 @@ const CATEGORY_ORDER = [
   'Core ML Concepts',
   'Data Science',
   'ML Engineering',
-  'GenAI & LLM Systems',
+  'Generative AI and LLM Systems',
   'Machine Learning & MLOps',
   'Data Science & Analytics',
   'Cloud, Big Data & AI Research',

@@ -6,7 +6,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Guided Project",
-  category: "GenAI & LLM Systems",
+  category: "Generative AI and LLM Systems",
     description: [
       "Built a serverless AI application on AWS using Lambda, API Gateway, and Amazon Bedrock, connecting an LLM backend to a frontend via a CORS-enabled REST API.",
       "Engineered structured JSON prompts to generate formatted flashcards from study notes, demonstrating end-to-end ownership of a full-stack AI pipeline."
@@ -572,7 +572,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
-  category: "GenAI & LLM Systems",
+  category: "Generative AI and LLM Systems",
     description: [
       "Used LangChain to invoke Amazon Bedrock models — comparing boto3 vs. ChatBedrock, building prompt templates, parsing structured output, and developing a stateful context-aware chatbot for AMusicVenue staff scheduling.",
       "Demonstrated model portability, PromptTemplate reuse, CommaSeparatedListOutputParser for structured output, and per-turn cost tracking via usage_metadata."
@@ -614,7 +614,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
-  category: "GenAI & LLM Systems",
+  category: "Generative AI and LLM Systems",
     description: [
       "Built an end-to-end RAG pipeline on Amazon Bedrock: S3 data source → Titan Text Embeddings v2 → OpenSearch Serverless vector store → Nova Lite → RetrieveAndGenerate API.",
       "System answers questions grounded in 6 internal AnyCompany documents with full source citations — compared against LLM-only responses to demonstrate quality difference."
@@ -1343,7 +1343,7 @@ const PROJECTS = [
     institution: "Zero to Agent Global Hackathon",
     year: "2026",
     type: "Hackathon Project",
-    category: "GenAI & LLM Systems",
+    category: "Generative AI and LLM Systems",
     description: [
       "Built and deployed ClassMaker.ai at the Zero to Agent Global Hackathon — a full-stack Next.js app where Groq's Llama 3.3 acts as a constraint-aware scheduling agent, generating weekly class schedules from student and class data and revising them through a plain-English chat interface.",
       "Live on Vercel within a single hackathon day: schedule generation and chat-based refinement both hit the same structured-JSON contract, with the API key kept server-side through Next.js API routes."
