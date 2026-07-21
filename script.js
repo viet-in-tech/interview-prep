@@ -52,7 +52,11 @@ const CATEGORY_ORDER = [
   'Core ML Concepts',
   'Data Science',
   'ML Engineering',
-  'From Your Projects',
+  'GenAI & LLM Systems',
+  'Machine Learning & MLOps',
+  'Data Science & Analytics',
+  'Cloud, Big Data & AI Research',
+  'Cloud Infrastructure & DevOps',
   'Startup Experience',
   'Behavioral',
   'Leadership Principles'

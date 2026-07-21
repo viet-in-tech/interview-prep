@@ -1,12 +1,12 @@
 const PROJECTS = [
   {
     id: "serverless-ai",
-    title: "Serverless AI Application",
+    title: "GenAI Flashcards App with AWS Lambda & Amazon Bedrock",
     subtitle: "AWS Lambda, Bedrock & API Gateway",
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Guided Project",
-  category: "From Your Projects",
+  category: "GenAI & LLM Systems",
     description: [
       "Built a serverless AI application on AWS using Lambda, API Gateway, and Amazon Bedrock, connecting an LLM backend to a frontend via a CORS-enabled REST API.",
       "Engineered structured JSON prompts to generate formatted flashcards from study notes, demonstrating end-to-end ownership of a full-stack AI pipeline."
@@ -72,7 +72,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 12 — Neural Networks & Deep Learning",
     year: "2026",
     type: "ML Project",
-    category: "From Your Projects",
+    category: "Machine Learning & MLOps",
     description: [
       "Built and trained a Keras Sequential regression network to predict annual medical insurance charges from six personal characteristics (age, sex, BMI, children, smoker, region) — approved on first submission.",
       "Designed a two-hidden-layer architecture (Dense 64→32, ReLU, Dropout 0.2) with EarlyStopping, achieving Test MSE: 0.0051, Test MAE: 0.0422, and a well-balanced model diagnosis across multiple runs."
@@ -130,7 +130,7 @@ const PROJECTS = [
     institution: "AWS Cloud Institute · Sprint 13 — AWS for Machine Learning",
     year: "2026",
     type: "Cloud ML Project",
-    category: "From Your Projects",
+    category: "Machine Learning & MLOps",
     description: [
       "Provisioned a full AWS cloud environment — VPC, public subnet, internet gateway, EC2 instance, and IAM role — then ran a complete ML training pipeline entirely in the cloud without storing credentials on the instance.",
       "Trained a Random Forest classifier on the Pima Indians Diabetes Dataset on EC2 and stored the model artifact in S3 — validated by an auto-grader scoring 274/274 (100%) across all infrastructure layers."
@@ -179,12 +179,12 @@ const PROJECTS = [
   ,
   {
     id: "churn-prediction",
-    title: "Beta Bank Customer Churn Prediction",
+    title: "Predicting Bank Churn with Feature Engineering & Random Forest",
     subtitle: "Binary Classification · Class Imbalance Handling",
     institution: "TripleTen · Sprint 9 — Feature Engineering",
     year: "2026",
     type: "ML Project",
-  category: "From Your Projects",
+  category: "Machine Learning & MLOps",
     description: [
       "Built a binary classification pipeline to predict whether Beta Bank customers would churn, addressing a real-world class imbalance where only ~20% of customers had left the bank.",
       "Benchmarked three imbalance strategies (class weights, upsampling, downsampling) across Logistic Regression, Decision Tree, and Random Forest — then tuned 108 hyperparameter combinations via GridSearchCV — achieving F1 = 0.6197 and ROC-AUC = 0.8618, exceeding the target of F1 ≥ 0.59."
@@ -261,12 +261,12 @@ const PROJECTS = [
   ,
   {
     id: "megaline-plan-recommendation",
-    title: "Mobile Plan Recommendation Engine",
+    title: "Recommending Mobile Plans with Random Forest & scikit-learn",
     subtitle: "Binary Classification · Decision Tree & Random Forest",
     institution: "TripleTen · Sprint 8 — Introduction to Machine Learning",
     year: "2025",
     type: "ML Project",
-  category: "From Your Projects",
+  category: "Machine Learning & MLOps",
     description: [
       "Built a binary classification model to recommend whether Megaline telecom customers should be on the Smart or Ultra plan based on their monthly usage behavior (calls, minutes, messages, data).",
       "Evaluated Decision Tree and Random Forest across two validation rounds with hyperparameter tuning, achieving 81.8% accuracy — exceeding the ≥75% project target by +6.8%."
@@ -331,12 +331,12 @@ const PROJECTS = [
   ,
   {
     id: "chicago-taxi-eda",
-    title: "Chicago Taxi Market Analysis",
+    title: "Proving Weather Impacts Taxi Rides with SQL & Hypothesis Testing",
     subtitle: "EDA & Hypothesis Testing · SQL + Python",
     institution: "TripleTen · Sprint 7 — Exploratory Data Analysis",
     year: "2025",
     type: "Data Analysis",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
     description: [
       "Analyzed Chicago's taxi market using SQL-sourced data, identifying market concentration patterns across 64 taxi companies and dropoff demand across 94 neighborhoods. Flash Cab led with 19,558 rides in a single weekend — nearly 2× the second-place company.",
       "Conducted a formal independent two-sample t-test to determine whether bad weather statistically significantly increases Loop-to-O'Hare ride duration. Result: t = 6.84, p ≈ 0 — bad weather adds ~6.9 minutes (+20.6%) to the average airport trip."
@@ -401,12 +401,12 @@ const PROJECTS = [
   ,
   {
     id: "video-game-sales-analysis",
-    title: "Video Game Sales Analysis",
+    title: "Guiding 2017 Ad Spend with EDA & Hypothesis Testing",
     subtitle: "EDA & Hypothesis Testing · Market Analysis for Ice",
     institution: "TripleTen · Sprint 6 — Exploratory Data Analysis",
     year: "2025",
     type: "Data Analysis",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
     description: [
       "Analyzed 16,715 historical video game records to identify the patterns that drive commercial success, building a data-backed 2017 advertising strategy for Ice, an online game retailer. Profiled platform life cycles, regional market preferences across NA, EU, and Japan, and the relationship between critic/user review scores and total sales.",
       "Ran two independent two-sample t-tests to validate platform and genre rating hypotheses — confirming that Xbox One and PC user ratings are statistically different (t = −4.67, p ≈ 0.000), while Action and Sports ratings are not (t = 1.79, p = 0.074). PS4 emerged as the dominant platform with 28.9% market share and 311M USD in sales across 2013–2016."
@@ -471,12 +471,12 @@ const PROJECTS = [
   ,
   {
     id: "specright-apache-spark",
-    title: "Specification Management App Powered by Apache Spark",
+    title: "Optimizing Big Data Performance with Apache Spark & Amazon EMR",
     subtitle: "Big Data Architecture · Apache Spark, Amazon EMR & AWS EC2",
     institution: "Georgia Tech CS 6675 — Big Data Systems & Analytics",
     year: "2024",
     type: "Final Project",
-  category: "From Your Projects",
+  category: "Cloud, Big Data & AI Research",
     description: [
       "Designed a prototype that enhances Specright — a leading specification management platform — with Apache Spark as a Big Data processing backend for Innovation First's VEX Robotics competition product line. Analyzed 85 real customer reviews to identify computing performance gaps, then benchmarked Sort Rate (TB/min) and Runtime (seconds) across Apache Spark, Hadoop MapReduce, and Amazon EMR on three EC2 instance types.",
       "Built a combined efficiency rubric (Sort Rate + Runtime) and determined that Specright on Amazon EMR 5.28 with a c4.8xlarge EC2 instance is the most efficient configuration — HIGH sort rate and LOW runtime (169.41 seconds). Completed April 20, 2024."
@@ -546,7 +546,7 @@ const PROJECTS = [
     institution: "TripleTen · Sprint 11 — Model Deployment",
     year: "2026",
     type: "ML Engineering Project",
-  category: "From Your Projects",
+  category: "Machine Learning & MLOps",
     description: [
       "Deployed a trained Random Forest regressor as a production-ready REST API using FastAPI and Pydantic — with schema-validated inputs, startup-loaded model, and correct HTTP status codes.",
       "Iteratively refined through three rounds of reviewer feedback, resolving all issues before final acceptance. Demonstrates ML engineering skills beyond the notebook."
@@ -567,12 +567,12 @@ const PROJECTS = [
   ,
   {
     id: "langchain-bedrock-models",
-    title: "Calling Bedrock Models with LangChain",
+    title: "Built a Stateful Chatbot with LangChain & Amazon Bedrock",
     subtitle: "LangChain · ChatBedrock · Prompt Templates · Stateful Chatbot",
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
-  category: "From Your Projects",
+  category: "GenAI & LLM Systems",
     description: [
       "Used LangChain to invoke Amazon Bedrock models — comparing boto3 vs. ChatBedrock, building prompt templates, parsing structured output, and developing a stateful context-aware chatbot for AMusicVenue staff scheduling.",
       "Demonstrated model portability, PromptTemplate reuse, CommaSeparatedListOutputParser for structured output, and per-turn cost tracking via usage_metadata."
@@ -609,12 +609,12 @@ const PROJECTS = [
   ,
   {
     id: "rag-bedrock-knowledge-base",
-    title: "RAG with Amazon Bedrock Knowledge Bases",
+    title: "Answering from Company Docs with RAG & Amazon Bedrock",
     subtitle: "S3 → Titan Embeddings → OpenSearch Serverless → Nova Lite",
     institution: "AWS Cloud Institute",
     year: "2026",
     type: "Applied Project",
-  category: "From Your Projects",
+  category: "GenAI & LLM Systems",
     description: [
       "Built an end-to-end RAG pipeline on Amazon Bedrock: S3 data source → Titan Text Embeddings v2 → OpenSearch Serverless vector store → Nova Lite → RetrieveAndGenerate API.",
       "System answers questions grounded in 6 internal AnyCompany documents with full source citations — compared against LLM-only responses to demonstrate quality difference."
@@ -655,12 +655,12 @@ const PROJECTS = [
   ,
   {
     id: "instacart-eda",
-    title: "Instacart Customer Behavior EDA",
+    title: "Uncovered Instacart Customer Behavior with Pandas & EDA",
     subtitle: "EDA · 4.5M Records · Multi-file Data Merging",
     institution: "TripleTen · Sprint 2 — Exploratory Data Analysis (EDA)",
     year: "2025",
     type: "EDA Project",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
     description: [
       "Sprint 2 Purpose: To conduct an Exploratory Data Analysis (EDA) by developing the skills of cleaning and analyzing data with an actual dataset from Instacart, a grocery delivery platform. Completed February 3, 2025.",
       "Cleaned and analyzed 4.5M order-product records from Instacart's 2017 Kaggle dataset across five CSV files — removing duplicates, resolving two structurally different missing value cases, and merging all five files into a unified dataframe.",
@@ -686,12 +686,12 @@ const PROJECTS = [
   ,
   {
     id: "vex-ai-robotics",
-    title: "VEX AI Robotics Competition Enhancement",
+    title: "Improvement Proposal for VEX Robot Navigation with RGB-D Mapping & SpotFi",
     subtitle: "SpotFi Localization · RGB-D 3D Mapping · P2P Coordination",
     institution: "Georgia Tech CS6675 · Spring 2024",
     year: "2024",
     type: "Research Paper",
-  category: "From Your Projects",
+  category: "Cloud, Big Data & AI Research",
     description: [
       "Proposed a layered AI system architecture to address the VEX AI Robotics system's critical limitations — the Sensor Fusion Map's forward-only visibility and lack of Z-axis awareness during the elevation scoring phase.",
       "Designed SpotFi WiFi localization + Intel RealSense RGB-D cameras as a baseline, then a P2P decentralized coordination layer using V5 Radio for real-time data sharing across all four robots' NVIDIA Jetson Nano processors."
@@ -716,12 +716,12 @@ const PROJECTS = [
   ,
   {
     id: "imdb-golden-age",
-    title: "IMDb \"Golden Age\" TV Analysis",
+    title: "Tested the Golden Age TV Hypothesis with Python & Pandas",
     subtitle: "Basic Python · Data Preprocessing · Hypothesis Testing",
     institution: "TripleTen · Sprint 3 — Basic Python",
     year: "2025",
     type: "EDA Project",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
     description: [
       "Tested the hypothesis that highly-rated TV shows from the 'Golden Age' of television (1999+) also receive the most IMDb votes — involving three-stage data preprocessing: column normalization, missing value handling, and implicit duplicate removal.",
       "Confirmed the hypothesis: shows with scores 7–9 had the highest average vote counts. Analysis covered ~94% of the original dataset after preprocessing."
@@ -754,12 +754,12 @@ const PROJECTS = [
   ,
   {
     id: "ai-fairness-cs6603",
-    title: "AI Fairness in Housing Lending",
+    title: "Audited Mortgage Bias with Fairness Metrics & Bias Mitigation",
     subtitle: "Disparate Impact · Reweighting · Fannie Mae 2008 Mortgage Data",
     institution: "Final Project · Georgia Tech OMSCS CS6603 — AI, Ethics, and Society",
     year: "2024",
     type: "Final Project",
-  category: "From Your Projects",
+  category: "Cloud, Big Data & AI Research",
     description: [
       "Final Project for CS6603 (AI, Ethics, and Society) in the Georgia Tech OMSCS program. Completed November 24, 2024.",
       "Applied Disparate Impact (DI) and Statistical Parity Difference (SPD) to 2,558,959 Fannie Mae 2008 mortgage records across Race (Asian vs. Black/African American) and Gender (Male vs. Female) — measuring disparity in LTV at origination and Borrower Income Ratio across 4 combinations, with full frequency distribution tables (Tables 6–9) and DI/SPD formulas (Table 12).",
@@ -789,12 +789,12 @@ const PROJECTS = [
   ,
   {
     id: "megaline-sda",
-    title: "Megaline Prepaid Plan SDA",
+    title: "Compared Telecom Plan Revenue with Statistical Analysis & Python",
     subtitle: "Statistical Data Analysis · Two-Sample T-Test · Revenue Analysis",
     institution: "TripleTen · Sprint 3 — Statistical Data Analysis (SDA)",
     year: "2025",
     type: "EDA Project",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
     description: [
       "Compared Megaline's Surf and Ultimate prepaid plans across 500 clients using SDA tools — barplots, histograms, boxplots — and two-sample t-tests to determine which plan is more profitable and whether NY-NJ users differ from the rest of the country.",
       "Result: T=−8.23, p≈0 — Surf generates significantly more average revenue ($50.33 vs $47.31) despite costing 3.5× less, due to high overage rates. No significant regional difference found."
@@ -1125,12 +1125,12 @@ const PROJECTS = [
 
 {
   id: "titanic-docker",
-  title: "Titanic: Docker & MLOps",
+  title: "Predicting Survival with Docker & FastAPI",
   subtitle: "Docker · FastAPI · MLOps",
   institution: "TripleTen",
-  year: "2025",
+  year: "2026",
   type: "ML Engineering Project",
-  category: "From Your Projects",
+  category: "Machine Learning & MLOps",
   description: [
     "Sprint 11 · TripleTen — April 6, 2026. Full MLOps cycle: train inside Docker → containerize FastAPI serving layer → publish to Docker Hub → full reviewer approval.",
     "Docker Hub: thetechlearner/titanic-survival-api:v1.0 · 81.56% test accuracy · 4 endpoints · all 10 checkpoints green."
@@ -1154,12 +1154,12 @@ const PROJECTS = [
 
 {
   id: "used-car-explorer",
-  title: "Used Car Price Explorer",
+  title: "Interactive Dashboard for Used Car Markets with Streamlit & Plotly",
   subtitle: "Streamlit · EDA · Interactive App",
   institution: "TripleTen",
   year: "2025",
   type: "EDA Project",
-  category: "From Your Projects",
+  category: "Data Science & Analytics",
   description: [
     "Sprint 4 · TripleTen. Interactive Streamlit EDA app on 51,525 used vehicle listings — deployed live on Render. Reveals how condition dominates model year as a pricing signal.",
     "Live app: tripleten-sprint4-ww34.onrender.com · Built with Plotly Express + Streamlit · GitHub-linked Render deployment."
@@ -1335,5 +1335,78 @@ const PROJECTS = [
       a: "<strong>Core Idea:</strong> Amazon is no longer a small company. Its decisions, products, and technologies have broad societal impact — on communities, the environment, small businesses, and people who aren't directly in the room. Leaders don't see this as a constraint — they see it as integral to long-term business success and to being a force for good in the world.<br><br><strong>Key Insight from Andy Jassy (video):</strong> (One of Amazon's newer LPs.) The core principle: with scale comes responsibility. Not just to customers and shareholders, but to the world at large. Good leaders don't just ask \"does this work for our customers today?\" They also ask \"what does this do to the people, communities, and environment affected by this decision?\" This is increasingly relevant in AI/ML — where models make decisions at scale that affect real people.<br><br><strong>Sample STAR:</strong><br><br><span class=\"star-label\">Situation</span> The Beta Bank churn prediction model, if deployed, would trigger targeted outreach to customers predicted as likely to leave. A high false-positive rate — flagging loyal customers as at-risk — would mean those customers receive unnecessary calls, potentially creating annoyance, eroding trust, and wasting the bank's limited retention resources on people who had no intention of leaving.<br><br><span class=\"star-label\">Task</span> Go beyond optimizing the headline F1 metric and explicitly consider the downstream human impact of the model's predictions on real customers at scale.<br><br><span class=\"star-label\">Action</span> I analyzed the precision-recall trade-off at the chosen threshold and translated the numbers into human terms. At the chosen threshold, for every 100 customers flagged as churning, a specific number would be loyal customers receiving unnecessary outreach — I documented this explicitly rather than burying it in a confusion matrix. I also included a recommendation in the analysis: \"The bank should use the precision-recall curve to consciously select their operating threshold based on their outreach capacity and their tolerance for false-positive contacts — because my model's output becomes action on real customers, not just a number on a dashboard.\"<br><br><span class=\"star-label\">Result</span> The analysis went from \"here is a model that exceeds the F1 threshold\" to \"here is how to deploy this model responsibly, with full awareness of its downstream human impact.\" A model is not a dashboard metric — its predictions become real actions that affect real people. Treating them that way from the start produces more trustworthy, deployable systems. This framing also demonstrates to stakeholders that the model builder understands the full system, not just the training loop.<br><br><strong>Watch Out:</strong> This LP is especially critical for anyone working in AI/ML, data products, or anything that scales to affect large numbers of people. Think beyond the immediate metric: who else is affected, what are the second-order effects, and how do you design for responsible deployment — not just strong evaluation numbers.<br><br><strong>Common interview prompts:</strong> \"Tell me about a time you considered the broader impact of a decision.\" / \"How do you think about responsibility when building technology at scale?\" / \"Tell me about a time you flagged an ethical concern or a second-order effect that others hadn't considered.\""
     }
   ]
-}
+},
+  {
+    id: "classmaker-ai",
+    title: "Built & Deployed My First AI Agent",
+    subtitle: "Next.js, Groq (Llama 3.3) & Vercel",
+    institution: "Zero to Agent Global Hackathon",
+    year: "2026",
+    type: "Hackathon Project",
+    category: "GenAI & LLM Systems",
+    description: [
+      "Built and deployed ClassMaker.ai at the Zero to Agent Global Hackathon — a full-stack Next.js app where Groq's Llama 3.3 acts as a constraint-aware scheduling agent, generating weekly class schedules from student and class data and revising them through a plain-English chat interface.",
+      "Live on Vercel within a single hackathon day: schedule generation and chat-based refinement both hit the same structured-JSON contract, with the API key kept server-side through Next.js API routes."
+    ],
+    tags: ["Next.js", "TypeScript", "Groq", "Llama 3.3", "Agentic AI", "Prompt Engineering", "Structured Output", "Vercel"],
+    qa: [
+      {
+        q: "What makes this an \"agentic\" AI system rather than just a generative feature?",
+        a: "<span class=\"star-label\">Situation</span> The distinction between a generative AI feature and an agentic one is easy to blur — both involve calling an LLM — but they solve fundamentally different problems.<br><br><span class=\"star-label\">Task</span> Build a system where the model's output is a structured, consequential artifact — a schedule that gets rendered and used — not text to be read.<br><br><span class=\"star-label\">Action</span> The system prompt defines an explicit constraint space (class capacity, grade range, fixed time blocks, per-student pickup cutoffs) and a fixed JSON output schema, then instructs the model to return only that JSON with no preamble or commentary. Llama 3.3's job isn't to answer a question — it's to reason through the constraints and produce a valid schedule the frontend can render directly into a color-coded weekly grid, with zero post-processing layer in between.<br><br><span class=\"star-label\">Result</span> The model takes an action (produce a valid schedule) rather than generating a response to read. That's the practical definition of agentic: structured output the system acts on, not prose a human interprets."
+      },
+      {
+        q: "How did you get Llama 3.3 to reliably return parseable JSON instead of wrapping it in markdown or adding commentary?",
+        a: "<span class=\"star-label\">Situation</span> Early iterations of the system prompt produced JSON that was usually correct but sometimes wrapped in markdown code fences or preceded by a sentence like \"Here's the schedule:\" — either of which breaks a strict JSON.parse() call on the frontend.<br><br><span class=\"star-label\">Task</span> Design a prompt that produces machine-parseable output on every single invocation, not just most of them.<br><br><span class=\"star-label\">Action</span> The system prompt explicitly states the exact schema with a concrete example embedded inline, and includes the direct instruction: \"Return ONLY a valid JSON array matching this exact schema — no markdown, no explanation, no preamble.\" Each constraint (capacity, grade range, pickup time) is described with a specific edge case it's meant to prevent, rather than left implicit. TypeScript interfaces for Student, Class, and ScheduleEntry gave a second layer of defense — if the model's output shape ever drifted, the mismatch surfaced at the type level before it became a runtime rendering bug.<br><br><span class=\"star-label\">Result</span> Consistent, directly parseable JSON across generation and chat-refinement calls alike. The lesson: getting reliable structured output from an LLM is a prompt-engineering problem with a testable success criterion, not a one-shot request you hope works."
+      },
+      {
+        q: "Why Groq specifically, and why does inference speed matter for this use case?",
+        a: "<span class=\"star-label\">Situation</span> Any hosted LLM API could technically generate the schedule JSON — the choice of inference provider wasn't just about capability, it was about the interaction feeling instant during a live hackathon demo.<br><br><span class=\"star-label\">Task</span> Pick an inference path where sub-second response times make schedule generation and chat refinement feel like a native app feature rather than a visible API round-trip.<br><br><span class=\"star-label\">Action</span> Groq's LPU-based inference on Llama 3.3-70b-versatile delivers materially faster token generation than typical GPU-hosted APIs at comparable model quality. That speed mattered twice: once for the initial schedule generation, and again for every chat-based revision, where a user expects a near-immediate updated grid after typing an instruction like \"move Maya out of Monday art.\"<br><br><span class=\"star-label\">Result</span> The scheduling interaction reads as instant rather than \"waiting for AI,\" which is a UX decision as much as a technical one — latency choices shape whether a feature feels like magic or friction."
+      },
+      {
+        q: "How does the chat-based schedule refinement actually work under the hood?",
+        a: "<span class=\"star-label\">Situation</span> After the initial schedule is generated, coordinators need to make targeted edits in plain English — but an LLM has no memory between independent API calls.<br><br><span class=\"star-label\">Task</span> Implement refinement so the model edits the existing schedule rather than regenerating a fresh one from scratch on every request.<br><br><span class=\"star-label\">Action</span> Each refinement request sends the full current schedule JSON back to the model as context, appended with the user's plain-English instruction. The system prompt for this path instructs the model to treat the existing schedule as the source of truth and apply only the requested change while re-verifying all original constraints still hold. The response is, again, a full JSON schedule matching the same schema as generation — so the frontend's rendering code doesn't need a separate code path for \"edited\" vs. \"generated\" schedules.<br><br><span class=\"star-label\">Result</span> Targeted, constraint-safe edits without any server-side session or database — state management lives entirely in what gets passed into each request. Without feeding the current schedule back as context, the model would have no basis for a targeted edit and would regenerate from a blank slate every time."
+      },
+      {
+        q: "How did the Next.js architecture keep the Groq API key secure while still feeling like a fast, client-driven app?",
+        a: "<span class=\"star-label\">Situation</span> The scheduling app needed to call the Groq API on every generation and refinement request, but a client-side call from the browser would expose the API key in the page's network traffic.<br><br><span class=\"star-label\">Task</span> Keep the GROQ_API_KEY server-side while still giving the React client a responsive, interactive schedule grid and chat interface.<br><br><span class=\"star-label\">Action</span> The browser never talks to Groq directly. Next.js API routes sit in between: the client posts student/class data (or a chat instruction plus the current schedule) to a Next.js server route, which constructs the full prompt, calls the Groq SDK using the server-only environment variable, and returns the resulting JSON to the client for rendering. App Router's split between server components and client components meant the sensitive call lived entirely server-side while the interactive grid and chat UI stayed client-side.<br><br><span class=\"star-label\">Result</span> No API key ever reaches the browser, and Vercel's zero-config deployment meant the entire deployment story was one environment variable set in the dashboard plus a `vercel deploy` — critical for shipping a production-ready app within a single hackathon day."
+      }
+    ]
+  },
+  {
+    id: "terraform-terratowns",
+    title: "Deployed Static Sites with Terraform & AWS S3",
+    subtitle: "Custom Go Provider, Terraform Modules & CloudFront",
+    institution: "ExamPro",
+    year: "2023",
+    type: "Bootcamp Capstone",
+    category: "Cloud Infrastructure & DevOps",
+    description: [
+      "Built a custom Terraform provider in Go (terraform-provider-terratowns) implementing full CRUD support against a REST API with no existing public provider, plus a reusable terrahome_aws module (S3 + CloudFront + OAC) instantiated twice to deploy two live static sites.",
+      "Remote state managed in Terraform Cloud with state locking; automatic cache invalidation via a local-exec provisioner keyed to a content_version variable."
+    ],
+    tags: ["Terraform", "Go", "AWS S3", "CloudFront", "Terraform Cloud", "Infrastructure as Code", "Provider Development", "OAC"],
+    qa: [
+      {
+        q: "Why did this project require writing a custom Terraform provider instead of just using an existing one?",
+        a: "<span class=\"star-label\">Situation</span> The ExamPro Terraform Beginner Bootcamp used TerraTowns, a custom cloud hosting platform, as its deployment target for a capstone project — and no public Terraform provider existed for it.<br><br><span class=\"star-label\">Task</span> Bring TerraTowns fully under Terraform's control so that `terraform apply` could create, update, and destroy hosted homes the same way it manages any AWS or GCP resource — preserving the core IaC guarantees of reproducibility, version control, and automated teardown.<br><br><span class=\"star-label\">Action</span> Built terraform-provider-terratowns from scratch in Go using the Terraform Plugin SDK: registered one resource type (terratowns_home) with five schema fields, and implemented resourceHouseCreate, resourceHouseRead, resourceHouseUpdate, and resourceHouseDelete as HTTP-backed CRUD functions against the TerraTowns REST API. The compiled binary is resolved locally via a local.providers source path, making it a first-class citizen alongside any registry provider.<br><br><span class=\"star-label\">Result</span> `terraform apply` and `terraform destroy` worked identically against TerraTowns as against any built-in AWS resource — deploying homes manually outside Terraform would have defeated the entire point of using IaC in the first place."
+      },
+      {
+        q: "Walk me through how the provider's CRUD functions actually work — what does d.SetId() do, and why does Read matter?",
+        a: "<span class=\"star-label\">Situation</span> Writing a provider means implementing the exact contract Terraform expects from every resource type, not just making arbitrary HTTP calls.<br><br><span class=\"star-label\">Task</span> Implement Create, Read, Update, and Delete so Terraform's state, plan, and diff logic all work correctly against a resource with no built-in provider support.<br><br><span class=\"star-label\">Action</span> resourceHouseCreate encodes the five schema fields into a JSON body and POSTs to /u/:uuid/homes; on success, the returned home UUID is stored via d.SetId() — this is what tells Terraform \"this resource now exists, and here is its unique identifier for all future operations.\" resourceHouseRead calls back to the API and syncs the current remote state into Terraform's in-memory representation, which is what lets `terraform plan` correctly detect drift if someone changes a home outside of Terraform. Update and Delete follow the same HTTP-backed pattern, using the stored ID to target the specific resource.<br><br><span class=\"star-label\">Result</span> A resource that participates fully in Terraform's plan/apply/destroy lifecycle — including drift detection through Read — exactly like any resource shipped in the official registry. Understanding this contract is what separates using a provider from being able to build one."
+      },
+      {
+        q: "You used Origin Access Control (OAC) for the CloudFront-to-S3 connection. What is OAC and why not just make the bucket public?",
+        a: "<span class=\"star-label\">Situation</span> Each static site needed its S3 bucket contents served through CloudFront, but S3 buckets serving public website content are a classic source of misconfigured, publicly-writable or overly permissive storage.<br><br><span class=\"star-label\">Task</span> Serve S3 content through CloudFront without making the underlying bucket directly, publicly accessible.<br><br><span class=\"star-label\">Action</span> Configured an aws_cloudfront_origin_access_control resource with SigV4 signing (signing_behavior = \"always\"), then wrote an S3 bucket policy restricting access to requests carrying that specific distribution's signature via the AWS:SourceArn condition. This means the bucket only serves content when the request is signed by that exact CloudFront distribution — direct requests to the S3 URL are rejected.<br><br><span class=\"star-label\">Result</span> The bucket stays private at the S3 level while still serving content globally through CloudFront's CDN — the current AWS best-practice pattern, and a meaningfully tighter security posture than the legacy Origin Access Identity (OAI) approach or a fully public bucket."
+      },
+      {
+        q: "How did you handle cache invalidation so updated content wasn't stuck behind CloudFront's cache?",
+        a: "<span class=\"star-label\">Situation</span> CloudFront caches content at edge locations for performance, but that means a content update to the S3 bucket wouldn't be visible to users until the cache expired or was manually invalidated.<br><br><span class=\"star-label\">Task</span> Automate cache invalidation as part of the Terraform workflow so deployments never serve stale content, without requiring a manual `aws cloudfront create-invalidation` step after every apply.<br><br><span class=\"star-label\">Action</span> Used a terraform_data resource with a local-exec provisioner keyed to a content_version input variable. Whenever content_version changes — signaling new content was uploaded — the provisioner triggers `aws cloudfront create-invalidation --paths '/*'` as part of the same `terraform apply`. This ties invalidation directly to Terraform's own change-detection rather than a separate manual or CI step.<br><br><span class=\"star-label\">Result</span> Every content update that bumps content_version automatically invalidates the CDN cache in the same apply — deployments are self-contained and there's no separate manual step to forget."
+      },
+      {
+        q: "Why build the AWS hosting infrastructure as a reusable module instead of just writing the S3/CloudFront resources twice?",
+        a: "<span class=\"star-label\">Situation</span> The project needed to deploy two separate static sites — an Arcanum game guide and a Vietnamese Pho recipe page — each needing its own S3 bucket, CloudFront distribution, and OAC configuration.<br><br><span class=\"star-label\">Task</span> Avoid duplicating the same ~six-resource hosting configuration twice with the risk of the two copies drifting out of sync over time.<br><br><span class=\"star-label\">Action</span> Authored terrahome_aws as a standalone module with explicit input variables, internal locals, and three outputs (bucket_name, website_endpoint, domain_name). The root main.tf instantiates it twice — module \"terrahome_arcanum\" and module \"terrahome_pho\" — and each instance's domain_name output flows directly into the corresponding terratowns_home resource's domain_name argument, wiring the AWS layer and the TerraTowns layer together through Terraform's dependency graph.<br><br><span class=\"star-label\">Result</span> Both sites share one audited, tested hosting configuration instead of two hand-maintained copies — the same separation-of-concerns principle as a well-designed function in application code, applied to infrastructure."
+      }
+    ]
+  }
+
 ];
