@@ -66,6 +66,68 @@ const PROJECTS = [
 
   ,
   {
+    id: "age-verification-cv",
+    title: "Estimating Customer Age from Photos with ResNet50 Transfer Learning",
+    subtitle: "Computer Vision · Transfer Learning · CNN Regression",
+    institution: "TripleTen · Sprint 14 — Computer Vision",
+    year: "2026",
+    type: "ML Project",
+    category: "Machine Learning & MLOps",
+    description: [
+      "Fine-tuned an ImageNet-pretrained ResNet50 to predict a shopper's age from a checkout-camera face photo, so the supermarket chain Good Seed could screen alcohol buyers for being underage. Trained on 7,591 labeled photos on a GPU.",
+      "Reached a final validation MAE of 7.65 years (best 6.64 at epoch 17), under the 8-year target. Recommended the model as a cashier-assist screening filter, not a replacement for ID checks. Passed review on iteration 2."
+    ],
+    tags: ["Python", "TensorFlow", "Keras", "ResNet50", "Transfer Learning", "CNN", "Computer Vision", "ImageDataGenerator", "Data Augmentation", "Regression", "Pandas", "Matplotlib", "GPU"],
+    qa: [
+      {
+        q: "Walk me through this project at a high level.",
+        a: "<span class=\"star-label\">Situation</span> Good Seed, a supermarket chain, must not sell alcohol to minors. Its checkout cameras already take a photo whenever someone buys alcohol.<br><br><span class=\"star-label\">Task</span> Evaluate whether a computer vision model can estimate a customer's age from that photo, with a validation MAE of 8 years or less.<br><br><span class=\"star-label\">Action</span> I ran EDA on 7,591 labeled face photos, then streamed them from disk with ImageDataGenerator using a seeded 75/25 train/validation split and horizontal flips on the training set only. I built a regression model from a ResNet50 backbone pre-trained on ImageNet, global average pooling and one output neuron, compiled with Adam (lr 0.0001), MSE loss and MAE metric. I packaged the functions into a script and trained it on a GPU for 20 epochs.<br><br><span class=\"star-label\">Result</span> Final validation MAE was 7.65 years, meeting the target, with a best of 6.64 at epoch 17. My business recommendation was to use it as a screening filter that prompts cashiers to check ID, because a 7–8 year average error can't reliably tell a 17-year-old from a 21-year-old."
+      },
+      {
+        q: "Why use transfer learning instead of training a CNN from scratch?",
+        a: "<span class=\"star-label\">Situation</span> The dataset had 7,591 images. That is moderate for deep learning. A deep CNN has millions of parameters, and training one from random weights on a few thousand images tends to overfit.<br><br><span class=\"star-label\">Task</span> Get a strong visual feature extractor without needing millions of labeled faces.<br><br><span class=\"star-label\">Action</span> I loaded ResNet50 with weights='imagenet' and include_top=False, which drops the 1,000-class ImageNet classifier and keeps the convolutional layers. Those layers already detect edges, textures and shapes, which are useful starting points for age cues such as wrinkles and skin texture. I added global average pooling and a single regression neuron on top, and fine-tuned the whole network with a small learning rate (0.0001) so the pre-trained weights adapt to faces instead of being overwritten.<br><br><span class=\"star-label\">Result</span> The model reached the 8-year MAE target within 20 epochs, and validation MAE stayed under 8 from epoch 6 onward except for one spike. Transfer learning is what made a dataset of this size workable."
+      },
+      {
+        q: "How did you handle loading 7,591 images without running out of memory?",
+        a: "<span class=\"star-label\">Situation</span> Loading all 7,591 photos at 224×224×3 as float arrays at once would use several gigabytes of memory, which is wasteful and can crash a notebook.<br><br><span class=\"star-label\">Task</span> Feed images to the model efficiently while keeping labels aligned with files.<br><br><span class=\"star-label\">Action</span> I used Keras ImageDataGenerator.flow_from_dataframe. It reads the labels dataframe, loads only one batch of images from disk at a time, resizes them to 224×224 and rescales pixels to [0, 1]. I set class_mode='raw' so the target is passed through as a number for regression rather than one-hot encoded as a class. The generator reported 'Found 7591 validated image filenames', which also confirmed every label had a matching photo.<br><br><span class=\"star-label\">Result</span> Memory use stayed constant regardless of dataset size, and the same loader pattern carried straight over to the GPU training script."
+      },
+      {
+        q: "How did you make sure the training and validation sets didn't overlap?",
+        a: "<span class=\"star-label\">Situation</span> The training and validation loaders were two separate functions, each building its own generator from the same labels file.<br><br><span class=\"star-label\">Task</span> Guarantee a clean held-out validation set, so the reported MAE is honest.<br><br><span class=\"star-label\">Action</span> Both loaders use the same dataframe, the same validation_split=0.25 and the same seed=12345, with subset='training' in one and subset='validation' in the other. Keras then splits the files the same way in both and returns complementary subsets. Augmentation (horizontal_flip) is set only in the training generator, so validation images are evaluated exactly as captured.<br><br><span class=\"star-label\">Result</span> A non-overlapping 75/25 split. The reviewer specifically confirmed that the subsets don't overlap and that augmentation leaves validation results unaltered."
+      },
+      {
+        q: "How did the EDA influence your modelling choices?",
+        a: "<span class=\"star-label\">Situation</span> EDA showed ages 1–100, right-skewed with a peak around 25–30. School-age children and adults over 60 were sparse, and there were spikes at round ages like 50, 60 and 70. The sample photos varied in rotation, lighting and color, and some faces were partly covered by glasses, caps or a microphone.<br><br><span class=\"star-label\">Task</span> Turn those observations into concrete decisions.<br><br><span class=\"star-label\">Action</span> Moderate dataset size led to transfer learning. Some photos were already rotated with black borders, so I used horizontal flips only (a mirrored face has the same age) and skipped heavy rotation. Faces were already cropped and centered, so no face-detection step was needed. The sparse age groups and round-number spikes told me to expect larger errors at the extremes and some label noise in MAE.<br><br><span class=\"star-label\">Result</span> Each modelling choice traced back to something in the data, and the reviewer noted that the findings section linked every EDA observation to a modelling consequence."
+      },
+      {
+        q: "Why MSE as the loss but MAE as the metric?",
+        a: "<span class=\"star-label\">Situation</span> This is a regression task with age in years as the target, and the business requirement was stated in MAE.<br><br><span class=\"star-label\">Task</span> Choose a loss that trains well and a metric that stakeholders can read.<br><br><span class=\"star-label\">Action</span> MSE squares errors, so it penalizes large misses heavily and gives smooth gradients for the optimizer. MAE is the average absolute error in years, which is exactly what the requirement measures and is easy to explain: 'on average the model is off by about 7.65 years.' I trained on MSE and tracked MAE every epoch. The output neuron uses ReLU so predicted ages can't go negative.<br><br><span class=\"star-label\">Result</span> Stable training, plus a metric reported in the same units as the business target, which made the go/no-go call straightforward."
+      },
+      {
+        q: "What did the training log tell you?",
+        a: "<span class=\"star-label\">Situation</span> I trained for a fixed 20 epochs and got a per-epoch log of training and validation loss and MAE.<br><br><span class=\"star-label\">Task</span> Judge whether the model generalizes and whether the final checkpoint is the right one to keep.<br><br><span class=\"star-label\">Action</span> Training MAE fell steadily from 7.43 to 3.18. Validation MAE improved more slowly and settled between about 6.6 and 7.7 after epoch 8. By epoch 20, training MAE was less than half of validation MAE, which is overfitting. Validation loss jumped from about 81 to 93.41 in the final epoch alone. There was also a spike at epoch 12 where validation MAE hit 11.46 before recovering.<br><br><span class=\"star-label\">Result</span> The model meets the target, but the margin is thin (7.65 vs. 8) and validation MAE swung between 6.64 and 11.46. Because there was no early stopping, the saved model is the epoch 20 one, about a year worse than the best epoch 17 model."
+      },
+      {
+        q: "How would you reduce overfitting and keep the best epoch?",
+        a: "<span class=\"star-label\">Situation</span> Training MAE reached 3.18 while validation MAE ended at 7.65, and the best validation result (6.64 at epoch 17) wasn't kept.<br><br><span class=\"star-label\">Task</span> Narrow the train/validation gap and make sure the deployed weights are the best ones.<br><br><span class=\"star-label\">Action</span> First, EarlyStopping on val_loss with restore_best_weights=True, which would have returned the epoch 17 model automatically. Second, ReduceLROnPlateau to lower the learning rate when validation loss stalls, which helps smooth out spikes like epoch 12. Third, regularization: a Dropout layer before the output (I had imported it but not used it), or freezing the early ResNet50 blocks so fewer weights adapt to the training set. Fourth, more data for under-represented ages.<br><br><span class=\"star-label\">Result</span> These are the next steps I listed in the project. The reviewer suggested the same direction: regularization or early stopping to narrow the gap between training and validation error."
+      },
+      {
+        q: "Can this model be used to decide whether to sell alcohol?",
+        a: "<span class=\"star-label\">Situation</span> The model meets the 8-year MAE target, but the legal decision happens at 21, and an average error of 7–8 years is large around that line.<br><br><span class=\"star-label\">Task</span> Give Good Seed an honest recommendation, not just a passing metric.<br><br><span class=\"star-label\">Action</span> I recommended using it as a screening filter, not an automatic age gate. If the predicted age is below a safe threshold, for example under 30 (roughly 21 plus the MAE), the register prompts the cashier to check ID. Customers who clearly look older pass through, and the final decision stays with staff. I also noted the trade-off: most shoppers in this data are in their 20s and 30s, so an 'under 30' rule still flags many people. A higher threshold catches more minors but saves fewer ID checks.<br><br><span class=\"star-label\">Result</span> A recommendation that reduces manual checks without handing a legal decision to a model with a 7.65-year average error. The reviewer called the conclusions thoughtful and asked for exactly this trade-off to be spelled out."
+      },
+      {
+        q: "MAE is 7.65 overall. Is that the right number to judge this model by?",
+        a: "<span class=\"star-label\">Situation</span> MAE is averaged across every age from 1 to 100, but Good Seed only cares about accuracy around the legal threshold.<br><br><span class=\"star-label\">Task</span> Identify what the overall metric hides and how to measure what actually matters.<br><br><span class=\"star-label\">Action</span> An overall MAE can look fine while the model is weaker exactly on 15–25 year-olds. I would break MAE down by age band, especially 15–25, and look at how often true minors are predicted above the screening threshold, because those misses carry the legal risk. A more direct option is to reframe the problem as a binary 'under 21 vs. 21+' classifier and tune it for recall on minors.<br><br><span class=\"star-label\">Result</span> This was the reviewer's main suggestion for future growth: check performance specifically near the legal threshold. It is the analysis I would run before any real deployment."
+      },
+      {
+        q: "How did the reviewer feedback change the project between iterations?",
+        a: "<span class=\"star-label\">Situation</span> The first submission did not pass. The 15-photo sample grid did not display in the saved notebook, and the final checklist was left unticked.<br><br><span class=\"star-label\">Task</span> Fix the presentation so a reviewer could actually verify the EDA observations.<br><br><span class=\"star-label\">Action</span> I re-ran the notebook so the sample photo grid rendered with each photo's age as its title, made sure my written observations (rotated photos, a black-and-white portrait, glasses, a cap, a veil) matched what the figure showed, and completed the checklist to reflect what the notebook actually contained.<br><br><span class=\"star-label\">Result</span> The project passed on iteration 2. The lesson was that a notebook is a report: if the evidence isn't visible, the conclusions can't be checked. I now re-run notebooks top to bottom before saving and submitting."
+      }
+    ]
+  }
+
+  ,
+  {
     id: "insurance-cost-nn",
     title: "Predicting Medical Insurance Costs with Deep Learning",
     subtitle: "Keras Regression · Deep Learning · Dropout Regularization",
